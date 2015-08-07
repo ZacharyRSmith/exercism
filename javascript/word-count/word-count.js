@@ -1,14 +1,14 @@
 module.exports = words;
 
 function addCount (elt, obj) {
-  if (isNaN(obj[elt])) { obj[elt] = 1; }
+  if (obj[elt] == null || isNaN(obj[elt])) { obj[elt] = 1; }
   else { obj[elt] += 1; }
 
   return obj;
 }
 
 function words (str) {
-  var words = str.trim().split(/\s+/);
+  var words = str.match(/\S+/g);
   var wordCounts = {};
 
   words.forEach(function (word) {
