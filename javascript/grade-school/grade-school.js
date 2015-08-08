@@ -2,7 +2,7 @@ function School () {
   var db = {};
 
   this.add = function (name, grade) {
-    if (!db[grade]) { db[grade] = []; }
+    db[grade] = (db[grade] || []);
 
     db[grade].push(name);
     db[grade].sort();
