@@ -7,6 +7,14 @@ describe("School", function() {
     school = new School();
   });
 
+  it("should not let outside code directly mutate DB", function() {
+    try { school.db.foo = ['bar']; }
+    catch (e) {}
+    try { school.db = { foo: 'bar' }; }
+    catch (e) {}
+    expect(school.roster()).toEqual({});
+  });
+
   it("a new school has an empty roster", function() {
     expect(school.roster()).toEqual({});
   });
