@@ -10,43 +10,32 @@ Acid.prototype = {
   constructor: Acid,
 
   count: function (nucToCount) {
-    if (this.sequence === '') { return 0; }
+    var regex = new RegExp(nucToCount, 'g');
+    var matches = this.sequence.match(regex)
 
-    var count = 0;
-    var seqAry = this.sequence.split('');
+    if (!matches) { return 0; }
 
-    seqAry.forEach(function (nuc) {
-      if (nuc === nucToCount) { count += 1; }
-    });
-
-    return count;
+    return matches.length;
   },
 
   histogram: function () {
-    var histogram = { A: 0, T: 0, C: 0, G: 0 };
-
-    if (this.sequence === '') { return histogram; }
-
-    var seqAry = this.sequence.split('');
-
-    seqAry.forEach(function (elt) {
-      histogram[elt] += 1;
-    });
-
-    return histogram;
+    return {
+      A: this.count('A'),
+      T: this.count('T'),
+      C: this.count('C'),
+      G: this.count('G'),
+    };
   },
 
   validateSequence: function (sequence) {
     if (!sequence) { return ''; }
 
-    var seqAry = sequence.split('');
+    var match = sequence.match(/[^AGCT]/);
 
-    seqAry.forEach(function (elt) {
-      if (['A', 'G', 'C', 'T'].indexOf(elt) === -1) {
+    if (match) {
         throw new Error("Only 'A', 'G', 'C', and 'T' nucleotides allowed, " +
-                        "but " + elt + "was given");
-      }
-    });
+                        "but " + match[0] + "was given");
+    }
 
     return sequence;
   }
