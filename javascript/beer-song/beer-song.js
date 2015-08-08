@@ -4,7 +4,7 @@ Beer.prototype = {
   constructor: Beer,
 
   sing: function (start, end) {
-    if (typeof end === 'undefined') { end = 0; }
+    end = (end || 0);
     var song = "";
 
     for (var verse = start; verse >= end; verse--) {
