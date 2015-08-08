@@ -4,14 +4,14 @@
 // Make sure to look at test.script.js--that should give you some hints about what is
 // expected here.
 
-var HelloWorld = function() {
-  
-};
+var HelloWorld = function() {};
 
-HelloWorld.prototype.hello = function(input) {
-  if (!input) { return 'Hello, world!'; }
+HelloWorld.prototype = {
+  constructor: HelloWorld,
 
-  return 'Hello, ' + input + '!';
+  hello: function (input) {
+  return 'Hello, ' + (input || 'world') + '!';
+  }
 };
 
 module.exports = HelloWorld;
