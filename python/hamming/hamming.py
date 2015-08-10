@@ -1,6 +1,6 @@
 def distance(a, b):
     if len(a) != len(b):
-        raise ValueError("Humming Distance is only defined for strands of equal length")
+        raise ValueError("Hamming Distance is only defined for strands of equal length")
 
     distance = 0
 
