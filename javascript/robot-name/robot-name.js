@@ -7,7 +7,7 @@ function randomLetter () {
 }
 
 function Robot () {
-  this._name = this.genId();
+  this._name = this.genName();
 }
 
 Robot.usedNames = {};
@@ -17,15 +17,15 @@ Robot.prototype = {
 
   get name () { return this._name; },
 
-  reset: function () { this._name = this.genId(); },
+  reset: function () { this._name = this.genName(); },
 
-  genId: function () {
+  genName: function () {
     var name = randomLetter().toUpperCase() + randomLetter().toUpperCase();
     // Get string of 3 random ints:
     name += (Math.random() + '').substr(2, 3);
 
     if (this.constructor.usedNames[name]) {
-      return this.genId();
+      return this.genName();
     } else {
       this.constructor.usedNames[name] = true;
     }
