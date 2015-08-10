@@ -6,32 +6,28 @@ function randomLetter () {
 //   return Math.random().toString(36).replace(/[^a-z]+/g, '')[0];
 }
 
-// Since only Robot is exported, I don't think this works as intended...
-var usedNames = {};
-
 function Robot () {
   this._name = this.genId();
 }
+
+Robot.usedNames = {};
 
 Robot.prototype = {
   constructor: Robot,
 
   get name () { return this._name; },
 
-  reset: function () {
-    this._name = this.genId();
-  },
+  reset: function () { this._name = this.genId(); },
 
   genId: function () {
-    var name = randomLetter().toUpperCase();
-    name += randomLetter().toUpperCase();
+    var name = randomLetter().toUpperCase() + randomLetter().toUpperCase();
     // Get string of 3 random ints:
     name += (Math.random() + '').substr(2, 3);
 
-    if (usedNames[name]) {
+    if (this.constructor.usedNames[name]) {
       return this.genId();
     } else {
-      usedNames[name] = true;
+      this.constructor.usedNames[name] = true;
     }
 
     return name;

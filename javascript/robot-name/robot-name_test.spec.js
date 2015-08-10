@@ -24,4 +24,22 @@ describe("Robot", function() {
     var newName = robot.name;
     expect(originalName).not.toEqual(newName);
   });
+
+  // Adapted from a test by @matthewmorgan
+  it("names are not repeated even with very large production of robots", function(){
+    var usedNames= {};
+    var robot1 =new Robot();
+    var robot2 =new Robot();
+    usedNames[robot1.name] = true;
+    usedNames[robot2.name] = true;
+
+    for (var i=0; i<30000; i++){
+      robot1.reset();
+      robot2.reset();
+      expect(usedNames[robot1.name]).toEqual(undefined);
+      expect(usedNames[robot2.name]).toEqual(undefined);
+      usedNames[robot1.name] = true;
+      usedNames[robot2.name] = true;
+    }
+  });
 });
