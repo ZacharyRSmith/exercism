@@ -1,9 +1,3 @@
-def detect_anagrams(word, candidates):
-    anagrams = []
-
-    for c in candidates:
-        if (c.lower() != word.lower()):
-            if sorted(c.lower()) == sorted(word.lower()):
-                anagrams.append(c)
-
-    return anagrams
+def detect_anagrams(word, candidate_list):
+    return filter(lambda c: (word.lower() != c.lower()) and
+                  (sorted(word.lower()) == sorted(c.lower())), candidate_list)
