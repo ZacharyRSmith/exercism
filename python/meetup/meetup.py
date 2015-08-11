@@ -6,8 +6,8 @@ class MeetupDayException(Exception):
     pass
 
 
-def get_day_of_week_int(str):
-    str = str.lower()
+def get_day_of_week_int(string):
+    string = string.lower()
     conversion = {
         'monday': 0,
         'tuesday': 1,
@@ -19,7 +19,7 @@ def get_day_of_week_int(str):
     }
 
     try:
-        return conversion[str]
+        return conversion[string]
     except:
         raise MeetupDayException('I did not understand your day! :_(')
 
