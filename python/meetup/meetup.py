@@ -1,8 +1,10 @@
 from datetime import date
 import calendar
 
+
 class MeetupDayException(Exception):
-	pass
+    pass
+
 
 def get_day_of_week_int(str):
     str = str.lower()
@@ -21,6 +23,7 @@ def get_day_of_week_int(str):
     except:
         raise MeetupDayException('I did not understand your day! :_(')
 
+
 def match_day(year, month, day_of_week, start):
     for day_of_month in range(start, start+7):
         try:
@@ -31,6 +34,7 @@ def match_day(year, month, day_of_week, start):
 
         if d.weekday() == day_of_week:
             return d
+
 
 def meetup_day(year, month, day_of_week_str, qualifier):
     day_of_week = get_day_of_week_int(day_of_week_str)
