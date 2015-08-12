@@ -1,13 +1,12 @@
-def slices(digits, size):
+def slices(series, size):
     if not size > 0:
-        raise ValueError("Your size argument must be an integer > 0")
-    if size > len(digits):
+        raise ValueError("Your size argument must be an integer greater "
+                         "than 0! ;_;")
+    if size > len(series):
         raise ValueError("Your size argument cannot be larger than the "
-                         "digits' length!")
+                         "series' length. Sneak!")
 
-    max_start = len(digits) - size
+    nums = [int(n) for n in series]
 
-    return [
-        [int(n) for n in digits[start:start+size]]
-        for start in xrange(max_start+1)
-    ]
+    return [nums[i:i+size]
+            for i in xrange(len(nums)+1 - size)]
