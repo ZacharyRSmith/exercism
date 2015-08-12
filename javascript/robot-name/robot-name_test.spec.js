@@ -11,11 +11,19 @@ describe("Robot", function() {
     expect(robot.name).toEqual(robot.name);
   });
 
-  it("different robots have different names", function() {
-    var robotOne = new Robot();
-    var robotTwo = new Robot();
-    expect(robotOne.name).not.toEqual(robotTwo.name);
-  });
+    it("different robots have different names", function() {
+      var usedNames= {};
+
+      var i = 0,
+          max = 10000;
+
+      for (i; i < max; i++) {
+        var newRobot = new Robot();
+        usedNames[newRobot.name] = true;
+      }
+
+      expect(Object.keys(usedNames).length).toEqual(10000);
+    });
 
   it("is able to reset the name", function() {
     var robot = new Robot();
@@ -26,23 +34,19 @@ describe("Robot", function() {
     expect(originalName).not.toEqual(newName);
   });
 
-  // Adapted from a test by @matthewmorgan
-  it("does not repeat names with lots of robots and resets", function(){
+  it("should set a unique name after reset", function() {
     var usedNames= {};
-    var robotPrimus = new Robot();
-    usedNames[robotPrimus.name] = true;
+    var robot = new Robot();
+    usedNames[robot.name] = true;
 
     var i = 0,
         max = 10000;
 
     for (i; i < max; i++) {
-      var newRobot = new Robot();
-      usedNames[newRobot.name] = true;
-
-      robotPrimus.reset();
-      usedNames[robotPrimus.name] = true;
+      robot.reset();
+      usedNames[robot.name] = true;
     }
 
-    expect(Object.keys(usedNames).length).toEqual(20001);
+    expect(Object.keys(usedNames).length).toEqual(10001);
   });
 });

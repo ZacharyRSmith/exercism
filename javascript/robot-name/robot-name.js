@@ -8,7 +8,8 @@ function randomLetter () {
 function Robot() {
   'use strict';
 
-  this._name = this.genName();
+  this._name = null;
+  this.name = this.genName();
 }
 
 Robot.usedNames = {};
@@ -29,11 +30,8 @@ Robot.prototype = {
     name += randomLetter().toUpperCase();
     name += (Math.random() + '').substr(2, 3);
 
-    if (this.constructor.usedNames[name]) {
+    if (name in this.constructor.usedNames) {
       return this.genName();
-    }
-    else {
-      this.constructor.usedNames[name] = true;
     }
 
     return name;
@@ -43,15 +41,17 @@ Robot.prototype = {
 
   set name (newName) {
     if (newName.search(/^[A-Z]{2}\d{3}$/) === -1) {
-      throw new UserError("Name must be 2 capital letters followed by 3 ints.");
+      throw new Error("Name must be 2 capital letters followed by 3 ints.");
+    }
+    if (newName in this.constructor.usedNames) {
+      throw new Error("Name " + newName + " has already been used!");
     }
 
+    this.constructor.usedNames[newName] = true;
     this._name = newName;
   },
 
-  reset: function() {
-    this.name = this.genName();
-  },
+  reset: function() { this.name = this.genName(); },
 };
 
 module.exports = Robot;
