@@ -1,4 +1,4 @@
-const SECONDS_PER_EARTH_YR = 31557600;
+var SECONDS_PER_EARTH_YR = 31557600;
 
 function SpaceAge (seconds) {
   this._seconds = seconds;
@@ -44,6 +44,6 @@ SpaceAge.prototype = {
   onNeptune: function () {
     return this.convertYears(164.79132);
   }
-}
+};
 
 module.exports = SpaceAge;
