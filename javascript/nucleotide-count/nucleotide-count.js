@@ -2,6 +2,7 @@ function dna (sequence) {
   return new Acid(sequence);
 }
 
+
 function Acid (sequence) {
   this.sequence = this.validateSequence(sequence);
 }
@@ -11,7 +12,7 @@ Acid.prototype = {
 
   count: function (nucToCount) {
     var regex = new RegExp(nucToCount, 'g');
-    var matches = this.sequence.match(regex)
+    var matches = this.sequence.match(regex);
 
     if (!matches) { return 0; }
 
@@ -39,6 +40,6 @@ Acid.prototype = {
 
     return sequence;
   }
-}
+};
 
 module.exports = dna;
