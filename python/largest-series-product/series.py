@@ -2,9 +2,7 @@ from operator import mul
 
 
 def largest_product(series, size):
-    products = map(lambda slic: reduce(mul, slic, 1), slices(series, size))
-
-    return reduce(lambda x, y: max(x, y), products[1:], products[0])
+    return max(reduce(mul, s, 1) for s in slices(series, size))
 
 
 def slices(series, size):
@@ -17,9 +15,7 @@ def slices(series, size):
         raise ValueError("Your size argument cannot be larger than the "
                          "series' length. Sneak!")
 
-    max_start = len(series) - size
+    nums = [int(n) for n in series]
 
-    return [
-        [int(n) for n in series[start:start+size]]
-        for start in xrange(max_start+1)
-    ]
+    return [nums[i:i+size]
+            for i in xrange(len(nums)+1 - size)]
