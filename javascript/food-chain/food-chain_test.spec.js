@@ -91,7 +91,7 @@ describe('Food Chain', function () {
     expected += "I know an old lady who swallowed a fly.\nI don't know why she swallowed the fly. Perhaps she'll die.\n\n";
     expected += "I know an old lady who swallowed a spider.\nIt wriggled and jiggled and tickled inside her.\n" +
       "She swallowed the spider to catch the fly.\n" +
-      "I don't know why she swallowed the fly. Perhaps she'll die.\n\n"
+      "I don't know why she swallowed the fly. Perhaps she'll die.\n\n";
 
     expect(song.verses(1, 2)).toEqual(expected);
   });
@@ -102,7 +102,7 @@ describe('Food Chain', function () {
     expected += "I know an old lady who swallowed a fly.\nI don't know why she swallowed the fly. Perhaps she'll die.\n\n";
     expected += "I know an old lady who swallowed a spider.\nIt wriggled and jiggled and tickled inside her.\n" +
     "She swallowed the spider to catch the fly.\n" +
-    "I don't know why she swallowed the fly. Perhaps she'll die.\n\n"
+    "I don't know why she swallowed the fly. Perhaps she'll die.\n\n";
     expected += "I know an old lady who swallowed a bird.\n" +
     "How absurd to swallow a bird!\n" +
     "She swallowed the bird to catch the spider that wriggled and jiggled and tickled inside her.\n" +

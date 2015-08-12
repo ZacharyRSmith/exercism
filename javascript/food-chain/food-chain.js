@@ -89,6 +89,6 @@ Song.prototype = {
 
     return verses;
   }
-}
+};
 
 module.exports = new Song();
