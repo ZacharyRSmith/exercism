@@ -1,12 +1,12 @@
 class Allergies (object):
     def __init__(self, allergy_score):
         # NOTE: I changed self.list to the pythonic self.lst
-        self.lst = self._get_lst(allergy_score)
+        self.lst = self.__gen_lst(allergy_score)
 
     def is_allergic_to(self, allergen):
         return allergen in self.lst
 
-    def _get_lst(self, allergy_score):
+    def __gen_lst(self, allergy_score):
         allergens = {
             1: 'eggs',
             2: 'peanuts',
