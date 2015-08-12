@@ -1,7 +1,6 @@
 def distance(a, b):
     if len(a) != len(b):
         raise ValueError("Hamming Distance is only defined for strands of " +
-                         "equal length")
+                         "equal length. like woah!")
 
-    return sum(1 for pair in zip(list(a), list(b))
-               if pair[0] != pair[1])
+    return sum(a != b for a, b in zip(list(a), list(b)))
