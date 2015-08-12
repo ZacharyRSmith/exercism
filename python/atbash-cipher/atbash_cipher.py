@@ -1,22 +1,14 @@
-from string import maketrans
+from string import ascii_letters, ascii_lowercase, maketrans
 import re
 
-trans_tbl = maketrans("abcdefghijklmnopqrstuvwxyz",
-                      "zyxwvutsrqponmlkjihgfedcba")
+ATBASH = maketrans(ascii_letters, 2*(ascii_lowercase[::-1]))
 
 
 def decode(code):
-    return code.replace(' ', '').translate(trans_tbl)
+    return code.translate(ATBASH, ' ')
 
 
 def encode(string):
-    return __group(
-        re.sub(r'[\W]+', '', string).lower().translate(trans_tbl)
-    )
+    s = re.sub(r'[\W]+', '', string).translate(ATBASH)
 
-
-def __group(string):
-    if len(string) <= 5:
-        return string
-
-    return string[:5] + " " + __group(string[5:])
+    return ' '.join([s[i:i + 5] for i in range(0, len(s), 5)])
