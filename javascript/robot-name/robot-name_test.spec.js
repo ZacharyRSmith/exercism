@@ -22,24 +22,27 @@ describe("Robot", function() {
     var originalName = robot.name;
     robot.reset();
     var newName = robot.name;
+    expect(newName).toMatch(/^[A-Z]{2}\d{3}$/);
     expect(originalName).not.toEqual(newName);
   });
 
   // Adapted from a test by @matthewmorgan
-  it("names are not repeated even with very large production of robots", function(){
+  it("does not repeat names with lots of robots and resets", function(){
     var usedNames= {};
-    var robot1 =new Robot();
-    var robot2 =new Robot();
-    usedNames[robot1.name] = true;
-    usedNames[robot2.name] = true;
+    var robotPrimus = new Robot();
+    usedNames[robotPrimus.name] = true;
 
-    for (var i=0; i<30000; i++){
-      robot1.reset();
-      robot2.reset();
-      expect(usedNames[robot1.name]).toEqual(undefined);
-      expect(usedNames[robot2.name]).toEqual(undefined);
-      usedNames[robot1.name] = true;
-      usedNames[robot2.name] = true;
+    var i = 0,
+        max = 10000;
+
+    for (i; i < max; i++) {
+      var newRobot = new Robot();
+      usedNames[newRobot.name] = true;
+
+      robotPrimus.reset();
+      usedNames[robotPrimus.name] = true;
     }
+
+    expect(Object.keys(usedNames).length).toEqual(20001);
   });
 });
