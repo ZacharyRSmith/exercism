@@ -1,14 +1,10 @@
 module.exports = function (dna) {
   if (!dna || /[^ATCG]/.test(dna)) {
-    throw new Error("shenanigans!!");
+    throw new Error("shenanigans!! D:");
   }
 
-  return dna.replace(/\w/g, function (match) {
-    switch (match) {
-      case 'C': return 'G';
-      case 'G': return 'C';
-      case 'A': return 'U';
-      case 'T': return 'A';
-    }
+  var complements = {G: 'C', C: 'G', A: 'U', T: 'A'};
+  return dna.replace(/\w/g, function (dnaNucleo) {
+    return complements[dnaNucleo];
   });
 };
