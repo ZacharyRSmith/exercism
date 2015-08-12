@@ -1,13 +1,12 @@
 class Allergies (object):
     def __init__(self, allergy_score):
         # NOTE: I changed self.list to the pythonic self.lst
-        self.lst = self._set_lst(allergy_score)
+        self.lst = self._get_lst(allergy_score)
 
     def is_allergic_to(self, allergen):
         return allergen in self.lst
 
-    def _set_lst(self, allergy_score):
-        lst = []
+    def _get_lst(self, allergy_score):
         allergens = {
             1: 'eggs',
             2: 'peanuts',
@@ -25,8 +24,5 @@ class Allergies (object):
 #                 lst.append(a)
 #                 allergy_score -= score
 
-        for score, a in allergens.iteritems():
-            if score & allergy_score > 0:
-                lst.append(a)
-
-        return lst
+        return [allergens[score] for score in allergens.keys()
+                if score & allergy_score > 0]
