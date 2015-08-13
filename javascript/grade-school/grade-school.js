@@ -6,9 +6,10 @@ function School() {
   function _deepCopy(arg) {
     if (arg instanceof Object) {
       var copy = Object.create(Object.getPrototypeOf(arg));
+      var props = Object.getOwnPropertyNames(arg);
 
-      Object.keys(arg).forEach(function (key) {
-        copy[key] = _deepCopy(arg[key]);
+      props.forEach(function (prop) {
+        copy[prop] = _deepCopy(arg[prop]);
       });
 
       return copy;
