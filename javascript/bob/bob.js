@@ -10,12 +10,12 @@ Bob.prototype.hey = function(input) {
   if (!input.trim()) { return 'Fine. Be that way!'; }
 
   // Yelling:
-  if (input.toUpperCase() === input && /[a-z]/i.test(input)) {
+  if (input.toUpperCase() === input && input.toLowerCase() !== input) {
     return 'Whoa, chill out!';
   }
 
   // Questions:
-  if (input.substr(input.length - 1) === '?') {
+  if (/\?$/.test(input)) {
     return 'Sure.';
   }
 
