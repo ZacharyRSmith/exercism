@@ -5,11 +5,11 @@ function words (str) {
   var wordCounts = {};
 
   words.forEach(function (word) {
-    if (wordCounts.hasOwnProperty(word)) {
-      wordCounts[word] += 1;
-    } else {
-      wordCounts[word] = 1;
+    if (!wordCounts.hasOwnProperty(word)) {
+      wordCounts[word] = 0;
     }
+
+    wordCounts[word] += 1;
   });
 
   return wordCounts;
