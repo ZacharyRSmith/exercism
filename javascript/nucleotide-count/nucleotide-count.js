@@ -8,10 +8,10 @@ function dna (sequence) {
   }
 
   var histogram_obj = {
-    'A': (sequence.match(/A/g) ? sequence.match(/A/g).length : 0),
-    'G': (sequence.match(/G/g) ? sequence.match(/G/g).length : 0),
-    'C': (sequence.match(/C/g) ? sequence.match(/C/g).length : 0),
-    'T': (sequence.match(/T/g) ? sequence.match(/T/g).length : 0)
+    'A': ((/A/).test(sequence) ? sequence.match(/A/g).length : 0),
+    'G': ((/G/).test(sequence) ? sequence.match(/G/g).length : 0),
+    'C': ((/C/).test(sequence) ? sequence.match(/C/g).length : 0),
+    'T': ((/T/).test(sequence) ? sequence.match(/T/g).length : 0)
   }
 
   function count (nucleoToCount) { return histogram_obj[nucleoToCount]; }
