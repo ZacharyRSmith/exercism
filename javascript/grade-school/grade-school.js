@@ -1,47 +1,36 @@
-function School () {
+function School() {
+  'use strict';
+
   var db = {};
 
-  this.add = function (name, grade) {
-    db[grade] = (db[grade] || []);
+  function _deepCopy(arg) {
+    if (arg instanceof Object) {
+      var copy = Object.create(Object.getPrototypeOf(arg));
 
-    db[grade].push(name);
+      Object.keys(arg).forEach(function (key) {
+        copy[key] = _deepCopy(arg[key]);
+      });
+
+      return copy;
+    }
+    else { return arg; }
+  }
+
+  function add(student, grade) {
+    db[grade] = db[grade] || [];
+    db[grade].push(student);
     db[grade].sort();
-  };
+  }
 
-  this.grade = function (grade) {
-    if (!db[grade]) { return []; }
+  function grade(number) {
+    return _deepCopy(db[number] || []);
+  }
 
-    return db[grade];
-  };
+  function roster() {
+    return _deepCopy(db);
+  }
 
-  this.roster = function () {
-      var dup = db;
-      return dup;
-  };
+  return { add: add, grade: grade, roster: roster };
 }
 
-
-// function School() {
-//   var rosterDb = {};
-
-//   this.roster = function() {
-//     var dup = {},
-//         k;
-//     for (k in rosterDb) {
-//       dup[k] = rosterDb[k];
-//     }
-//     return dup;
-//   };
-
-//   this.add = function(name, grade) {
-//     rosterDb[grade] = rosterDb[grade] || [];
-//     rosterDb[grade].push(name);
-//     rosterDb[grade].sort();
-//   };
-
-//   this.grade = function(n) {
-//     return (rosterDb[n] ? rosterDb[n] : []);
-//   };
-// }
-
-// module.exports = School;
+module.exports = School;

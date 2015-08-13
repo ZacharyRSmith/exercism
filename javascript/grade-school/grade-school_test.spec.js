@@ -7,14 +7,6 @@ describe("School", function() {
     school = new School();
   });
 
-  it("should not let outside code directly mutate DB", function() {
-    try { school.db.foo = ['bar']; }
-    catch (e) {}
-    try { school.db = { foo: 'bar' }; }
-    catch (e) {}
-    expect(school.roster()).toEqual({});
-  });
-
   it("a new school has an empty roster", function() {
     expect(school.roster()).toEqual({});
   });
@@ -65,4 +57,35 @@ describe("School", function() {
     expect(school.roster()).toEqual(sorted);
   });
 
+  it("should not let outside code directly mutate DB", function() {
+    try { school.db.foo = ['bar']; }
+    catch (e) {}
+    try { school.db = { foo: 'bar' }; }
+    catch (e) {}
+    expect(school.roster()).toEqual({});
+  });
+
+  it("modifying returned roster should not change internal School db state", function() {
+    school.add("Jennifer", 4);
+    school.add("Kareem", 6);
+    school.add("Christopher", 4);
+    sorted = {
+      4 : ["Christopher", "Jennifer"],
+      6 : ["Kareem"]
+    };
+    roster = school.roster();
+    roster[3] = ["Kyle"];
+    roster[4].push("John");
+    expect(school.roster()).toEqual(sorted);
+  });
+
+  it("modifying returned grade should not change internal School db state", function() {
+    school.add("Franklin",5);
+    school.add("Bradley",5);
+    school.add("Jeff",1);
+    var expectedStudents = [ "Bradley", "Franklin" ];
+    var grade = school.grade(5);
+    grade.push("Betty");
+    expect(school.grade(5)).toEqual(expectedStudents);
+  });
 });
