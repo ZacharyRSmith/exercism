@@ -1,53 +1,36 @@
-function anagram (subject) {
-  return new AnagramMatcher(subject);
-}
+function anagram (input) {
+  var origWord = input.trim().toLowerCase();
 
-function AnagramMatcher (subject) {
-  this.subject = subject.toLowerCase();
 
-  this.isMatch = function (candidate) {
-    if (candidate.length !== this.subject.length) { return false; }
-    if (candidate === this.subject) { return false; }
-    var left_of_subject = this.subject;
+  var isMatch = function (candidate) {
+    candidate = candidate.toLowerCase();
 
-    for (var char in candidate) {
-      var charInd = left_of_subject.indexOf(candidate[char]);
+    if (candidate === origWord) { return false; }
 
-      if (charInd === -1) { return false; }
-
-      left_of_subject = this.removeChar(candidate[char], left_of_subject);
-    }
-
-    return true;
+    return candidate.split('').sort().join('') ===
+           origWord.split('').sort().join('');
   };
 
-  this.removeChar = function (char, str) {
-    var charInd = str.indexOf(char);
 
-    return str.slice(0, charInd) + str.slice(charInd + 1);
-  };
-
-  this.matches = function () {
-    var input = [];
+  var matches = function (arg) {
+    var candidates = [];
     // Iterate over arguments instead of slice for optimization:
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments
-    for (var arg in arguments) { input.push(arguments[arg]); }
-
-    var matches = [];
-    var self = this;
-
-    input.forEach(function (arg) {
-      if (arg instanceof Array) {
-        arg.forEach(function (word) {
-          if (self.isMatch(word.toLowerCase())) { matches.push(word); }
-        });
-      } else {
-        if (self.isMatch(arg.toLowerCase())) { matches.push(arg); }
+    if (arg instanceof Array) {
+      candidates = arg;
+    }
+    else {
+      for (var key in arguments) {
+        candidates.push(arguments[key]);
       }
-    });
+    }
 
-    return matches;
+    return candidates.filter(function (candidate) {
+      return isMatch(candidate.toLowerCase());
+    }, this);
   };
+
+  return { matches: matches };
 }
 
 module.exports = anagram;

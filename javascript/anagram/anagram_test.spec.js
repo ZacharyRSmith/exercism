@@ -1,6 +1,5 @@
 var anagram = require('./anagram');
-  
-console.log("HELLO", anagram);
+
 describe('Anagram', function() {
 
   it("no matches",function() {
