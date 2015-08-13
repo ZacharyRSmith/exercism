@@ -7,10 +7,12 @@ function dna (sequence) {
                     "but " + match[0] + " was given");
   }
 
-  var histogram_obj = sequence.split('').reduce(function (hist, nucleo) {
-    hist[nucleo] += 1;
-    return hist;
-  }, { 'A': 0, 'G': 0, 'C': 0, 'T': 0 });
+  var histogram_obj = {
+    'A': (sequence.match(/A/g) ? sequence.match(/A/g).length : 0),
+    'G': (sequence.match(/G/g) ? sequence.match(/G/g).length : 0),
+    'C': (sequence.match(/C/g) ? sequence.match(/C/g).length : 0),
+    'T': (sequence.match(/T/g) ? sequence.match(/T/g).length : 0)
+  }
 
   function count (nucleoToCount) { return histogram_obj[nucleoToCount]; }
 
