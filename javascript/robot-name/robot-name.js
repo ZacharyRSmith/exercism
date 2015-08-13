@@ -40,7 +40,7 @@ Robot.prototype = {
   get name () { return this._name; },
 
   set name (newName) {
-    if (newName.search(/^[A-Z]{2}\d{3}$/) === -1) {
+    if (!(/^[A-Z]{2}\d{3}$/).test(newName)) {
       throw new Error("Name must be 2 capital letters followed by 3 ints.");
     }
     if (newName in this.constructor.usedNames) {
