@@ -13,6 +13,20 @@ var at = function(hour, min) {
     'hour': hour, 'min': (min || 0)
   };
 
+  result.minus = function(min) {
+    result.min -= min;
+
+    while (result.min < 0) {
+      result.hour -= 1;
+      result.min += 60;
+    }
+    while (result.hour < 0) {
+      result.hour += 24;
+    }
+
+    return result;
+  };
+
   result.plus = function(min) {
     result.min += min;
 
