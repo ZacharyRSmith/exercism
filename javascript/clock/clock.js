@@ -15,6 +15,12 @@ var at = function(hour, min) {
 
   result.plus = function(min) {
     result.min += min;
+
+    while (result.min >= 60) {
+      result.hour += 1;
+      result.min -= 60;
+    }
+    
     return result;
   };
 

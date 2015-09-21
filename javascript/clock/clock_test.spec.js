@@ -17,7 +17,7 @@ describe('Clock', function () {
     expect(clock.toString()).toEqual('10:03');
   });
 
-  xit('can add over an hour', function () {
+  it('can add over an hour', function () {
     var clock = at(10).plus(61);
     expect(clock.toString()).toEqual('11:01');
   });
