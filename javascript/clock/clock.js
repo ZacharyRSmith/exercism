@@ -13,6 +13,10 @@ var at = function(hour, min) {
     'hour': hour, 'min': (min || 0)
   };
 
+  result.equals = function(otherClock) {
+    return result.toString() === otherClock.toString();
+  };
+
   result.minus = function(min) {
     result.min -= min;
 
