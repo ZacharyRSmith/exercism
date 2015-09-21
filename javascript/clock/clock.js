@@ -20,7 +20,10 @@ var at = function(hour, min) {
       result.hour += 1;
       result.min -= 60;
     }
-    
+    while (result.hour >= 24) {
+      result.hour -= 24;
+    }
+
     return result;
   };
 
