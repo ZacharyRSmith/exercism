@@ -8,10 +8,20 @@ var bufferEmptyException = function () {
   };
 };
 
+var bufferFullException = function () {
+  return {
+    name: "bufferFullException",
+    message: "Cannot write to a full buffer!",
+    toString: function () {
+      return this.name + ": " + this.message;
+    } 
+  };
+};
+
 var circularBuffer = function (size) {
   var buffer = new Array(size);
 
-  var newest = 0;
+  var next = 0;
   var oldest = 0;
 
   var _increment = function (index) {
@@ -30,12 +40,16 @@ var circularBuffer = function (size) {
     });
   };
 
+  buffer._isFull = function () {
+    return (next === oldest) && buffer[next] !== undefined;
+  };
+
   buffer.clear = function () {
-    newest = 0;
+    next = 0;
     oldest = 0;
-    buffer.every(function (elt) {
-      elt = undefined;
-    });
+    for (var i = 0; i < buffer.length; i++) {
+      buffer[i] = undefined;
+    }
   };
 
   buffer.read = function () {
@@ -53,8 +67,11 @@ var circularBuffer = function (size) {
     if (input == null) {
       return;
     }
-    buffer[newest] = input;
-    newest = _increment(newest);
+    if (buffer._isFull()) {
+      throw new bufferFullException();
+    }
+    buffer[next] = input;
+    next = _increment(next);
   };
 
   return buffer;
@@ -63,4 +80,4 @@ var circularBuffer = function (size) {
 
 module.exports.circularBuffer = circularBuffer;
 module.exports.bufferEmptyException = bufferEmptyException;
-// module.exports.bufferFullException = bufferFullException;
+module.exports.bufferFullException = bufferFullException;

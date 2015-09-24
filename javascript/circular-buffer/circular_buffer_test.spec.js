@@ -30,6 +30,7 @@ describe('CircularBuffer', function() {
     buffer.write('1');
     buffer.write('2');
     buffer.clear();
+    console.log("BUFFER", buffer.slice());
     expect(buffer.read).toThrowError;
     buffer.write('3');
     buffer.write('4');
@@ -63,7 +64,7 @@ describe('CircularBuffer', function() {
     expect(buffer.read()).toBe('1');
   });
 
-  xit('writing to a full buffer throws a BufferFullException', function() {
+  it('writing to a full buffer throws a BufferFullException', function() {
     var buffer = circularBuffer(2);
     buffer.write('1');
     buffer.write('2');
