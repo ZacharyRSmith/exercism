@@ -30,6 +30,14 @@ var circularBuffer = function (size) {
     });
   };
 
+  buffer.clear = function () {
+    newest = 0;
+    oldest = 0;
+    buffer.every(function (elt) {
+      elt = undefined;
+    });
+  };
+
   buffer.read = function () {
     if (buffer._isEmpty()) {
       throw new bufferEmptyException();
