@@ -73,7 +73,7 @@ describe('CircularBuffer', function() {
     }).toThrow(bufferFullException());
   });
 
-  xit('forced writes over write oldest item in a full buffer', function() {
+  it('forced writes over write oldest item in a full buffer', function() {
     var buffer = circularBuffer(2);
     buffer.write('1');
     buffer.write('2');
@@ -83,7 +83,7 @@ describe('CircularBuffer', function() {
     expect(buffer.read).toThrow(bufferEmptyException());
   });
 
-  xit('alternate force write and read into full buffer', function() {
+  it('alternate force write and read into full buffer', function() {
     var buffer = circularBuffer(5);
     [1,2,3].map(function(i) { buffer.write(i.toString()); });
     buffer.read();

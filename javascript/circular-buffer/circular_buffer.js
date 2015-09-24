@@ -52,6 +52,17 @@ var circularBuffer = function (size) {
     }
   };
 
+  buffer.forceWrite = function (input) {
+    if (input == null) {
+      return;
+    }
+    if (next === oldest) {
+      oldest = _increment(oldest);
+    }
+    buffer[next] = input;
+    next = _increment(next);
+  };
+
   buffer.read = function () {
     if (buffer._isEmpty()) {
       throw new bufferEmptyException();
