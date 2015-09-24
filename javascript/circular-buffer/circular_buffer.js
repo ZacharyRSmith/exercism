@@ -1,3 +1,5 @@
+'use strict';
+
 var bufferEmptyException = function () {
   return {
     name: "bufferEmptyException",
@@ -26,12 +28,7 @@ var circularBuffer = function (size) {
 
   var _increment = function (index) {
     index += 1;
-
-    if (index === buffer.length) {
-      index = 0;
-    }
-
-    return index;
+    return index % size;
   };
 
   buffer._isEmpty = function () {
@@ -47,7 +44,7 @@ var circularBuffer = function (size) {
   buffer.clear = function () {
     next = 0;
     oldest = 0;
-    
+
     for (var i = 0; i < buffer.length; i++) {
       buffer[i] = undefined;
     }
