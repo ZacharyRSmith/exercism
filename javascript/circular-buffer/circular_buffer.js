@@ -36,7 +36,7 @@ var circularBuffer = function (size) {
 
   buffer._isEmpty = function () {
     return buffer.every(function (elt) {
-      return elt == undefined;
+      return elt === undefined;
     });
   };
 
@@ -47,6 +47,7 @@ var circularBuffer = function (size) {
   buffer.clear = function () {
     next = 0;
     oldest = 0;
+    
     for (var i = 0; i < buffer.length; i++) {
       buffer[i] = undefined;
     }
@@ -89,6 +90,8 @@ var circularBuffer = function (size) {
 };
 
 
-module.exports.circularBuffer = circularBuffer;
-module.exports.bufferEmptyException = bufferEmptyException;
-module.exports.bufferFullException = bufferFullException;
+module.exports = {
+  circularBuffer: circularBuffer,
+  bufferEmptyException: bufferEmptyException,
+  bufferFullException: bufferFullException
+};
