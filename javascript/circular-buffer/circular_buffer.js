@@ -11,16 +11,39 @@ var bufferEmptyException = function () {
 var circularBuffer = function (size) {
   var buffer = new Array(size);
 
-  buffer.isEmpty = function () {
+  var newest = 0;
+  var oldest = 0;
+
+  var _increment = function (index) {
+    index += 1;
+
+    if (index === buffer.length) {
+      index = 0;
+    }
+
+    return index;
+  };
+
+  buffer._isEmpty = function () {
     return buffer.every(function (elt) {
       return elt === undefined;
     });
   };
 
   buffer.read = function () {
-    if (buffer.isEmpty()) {
+    if (buffer._isEmpty()) {
       throw new bufferEmptyException();
     }
+    var val = buffer[oldest];
+    buffer[oldest] = undefined;
+    oldest = _increment(oldest);
+
+    return val;
+  };
+
+  buffer.write = function (input) {
+    buffer[newest] = input;
+    newest = _increment(newest);
   };
 
   return buffer;
