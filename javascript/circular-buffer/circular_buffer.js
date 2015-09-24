@@ -26,7 +26,7 @@ var circularBuffer = function (size) {
 
   buffer._isEmpty = function () {
     return buffer.every(function (elt) {
-      return elt === undefined;
+      return elt == undefined;
     });
   };
 
@@ -50,6 +50,9 @@ var circularBuffer = function (size) {
   };
 
   buffer.write = function (input) {
+    if (input == null) {
+      return;
+    }
     buffer[newest] = input;
     newest = _increment(newest);
   };
