@@ -5,8 +5,10 @@ function Trinary(str) {
   this.digs = str.split('');
 }
 Trinary.prototype.toDecimal = function() {
-  return this.digs.reverse().reduce(function(sum, crnt, i) {
-    return sum + (crnt * Math.pow(3, i));
+  return this.digs.reduce(function(sum, crnt, i) {
+    return sum * 3 + parseInt(crnt);
+    // Also works:
+    // return sum + (crnt * Math.pow(3, i));
   }, 0);
 };
 
