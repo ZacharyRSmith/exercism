@@ -12,10 +12,6 @@ module.exports = function() {
       result += 'Plong';
     }
 
-    if (result === '') {
-      return '' + int;
-    } else {
-      return result;
-    }
+    return result || '' + int;
   };
 };
