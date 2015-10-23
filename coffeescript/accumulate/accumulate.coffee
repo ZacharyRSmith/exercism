@@ -1,9 +1,3 @@
-Array.prototype.accumulate = (accumulator)->
-    res = []
-
-    for elt in @
-        res.push accumulator elt
-
-    res
-
-module.exports = Array.prototype.accumulate
+Array::accumulate = (accumulator)->
+    for elt in this
+      accumulator(elt)
