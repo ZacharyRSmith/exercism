@@ -1,12 +1,14 @@
 class Bob
-  hey: (greeting)->
-    if greeting.toUpperCase() is greeting and /[a-zA-Z]/.test(greeting)
-      return "Whoa, chill out!"
-    if greeting.substr(-1) is "?"
-      return "Sure."
-    if greeting.trim() is ""
-      return "Fine. Be that way!"
+  hey: (prompt) ->
+    response = if prompt.toUpperCase() is prompt and /[a-zA-Z]/.test(prompt)
+      "Whoa, chill out!"
+    else if prompt.endsWith("?")
+      "Sure."
+    else if prompt.trim() is ""
+      "Fine. Be that way!"
+    else
+      "Whatever."
 
-    "Whatever."
+    response
 
 module.exports = Bob
