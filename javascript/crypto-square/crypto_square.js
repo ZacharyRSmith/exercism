@@ -12,7 +12,7 @@ function Crypto(plaintext) {
     }
     return result;
   };
-BUG
+
   this.normalizeCiphertext = function() {
     return this.ciphertext();
   };
@@ -35,11 +35,12 @@ BUG
   this.size = function() {
     var sqrt = Math.sqrt(this.normalizePlaintext().length);
 
-    if (sqrt % 1 > 0) {
-      return Math.floor(sqrt) + 1;
-    } else {
-      return sqrt;
-    }
+    return Math.ceil(sqrt);
+    // if (sqrt % 1 > 0) {
+    //   return Math.floor(sqrt) + 1;
+    // } else {
+    //   return sqrt;
+    // }
   };
 }
 
