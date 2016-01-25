@@ -6,14 +6,10 @@ class Raindrops
   }
 
   def self.convert(int)
-    sound = ''
+    sound = SOUNDS_MAP.map do |factor, factor_sound|
+      SOUNDS_MAP[factor] if int % factor == 0
+    end.compact
 
-    SOUNDS_MAP.each_key do |factor|
-      if int % factor == 0
-        sound += SOUNDS_MAP[factor]
-      end
-    end
-
-    sound.empty? ? String(int) : sound
+    sound.empty? ? String(int) : sound.join('')
   end
 end
