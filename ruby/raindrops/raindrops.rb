@@ -1,15 +1,17 @@
 class Raindrops
+  SOUNDS_MAP = {
+    3 => "Pling",
+    5 => "Plang",
+    7 => "Plong"
+  }
+
   def self.convert(int)
     sound = ''
 
-    if int % 3 == 0
-      sound += 'Pling'
-    end
-    if int % 5 == 0
-      sound += 'Plang'
-    end
-    if int % 7 == 0
-      sound += 'Plong'
+    SOUNDS_MAP.each_key do |factor|
+      if int % factor == 0
+        sound += SOUNDS_MAP[factor]
+      end
     end
 
     sound.empty? ? String(int) : sound
