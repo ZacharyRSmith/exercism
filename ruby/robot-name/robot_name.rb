@@ -1,5 +1,8 @@
+require 'set'
+
+
 class Robot
-  @@used_names = { }
+  @@used_names = Set.new
 
   attr_reader :name
   def initialize
@@ -10,9 +13,9 @@ class Robot
     name = ''
     2.times { name << [*'A'..'Z'].sample }
     name << "%03d" % rand(0..999)
-    return Robot.gen_name if @@used_names[name]
+    return Robot.gen_name if @@used_names.include?(name)
 
-    @@used_names[name] = true
+    @@used_names << name
     name
   end
 
