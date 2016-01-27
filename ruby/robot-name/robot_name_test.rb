@@ -16,19 +16,28 @@ class RobotTest < Minitest::Test
   end
 
   def test_name_sticks
-    skip
     robot = Robot.new
     robot.name
     assert_equal robot.name, robot.name
   end
 
   def test_different_robots_have_different_names
-    skip
     refute_equal Robot.new.name, Robot.new.name
   end
 
+  def test_different_robots_have_different_names_better_test
+    used_names = { }
+
+    for i in 1..10000 do
+      name = Robot.new.name
+
+      refute used_names[name]
+
+      used_names[name] = true
+    end
+  end
+
   def test_reset_name
-    skip
     robot = Robot.new
     name = robot.name
     robot.reset
