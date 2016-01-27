@@ -1,23 +1,23 @@
 class Robot
   @@used_names = { }
 
+  attr_reader :name
   def initialize
-    @name = Robot.new_name
+    @name = Robot.gen_name
   end
 
-  def self.new_name
-    name = ('A'..'Z').to_a.shuffle[0,2].join + (0..9).to_a.shuffle[0,3].join
-    return Robot.new_name if @@used_names[name]
+  def self.gen_name
+    name = ''
+    2.times { name << [*'A'..'Z'].sample }
+    name << "%03d" % rand(0..999)
+    return Robot.gen_name if @@used_names[name]
 
     @@used_names[name] = true
     name
   end
 
-  def name
-    @name
-  end
-
   def reset
-    @name = Robot.new_name
+    @@used_names.delete(@name)
+    @name = Robot.gen_name
   end
 end
