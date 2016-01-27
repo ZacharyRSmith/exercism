@@ -37,6 +37,34 @@ class RobotTest < Minitest::Test
     end
   end
 
+  def test_creation_of_name_with_zero_padded_digits
+    found_zero_padded = false
+
+    for i in 1..10000 do
+      name = Robot.new.name
+
+      if name[2] == '0'
+        found_zero_padded = true
+      end
+    end
+
+    assert found_zero_padded
+  end
+
+  def test_creation_of_name_with_repeated_letters
+    found_repeated_letters = false
+
+    for i in 1..10000 do
+      name = Robot.new.name
+
+      if name[0..1] == 'AA'
+        found_repeated_letters = true
+      end
+    end
+
+    assert found_repeated_letters
+  end
+
   def test_reset_name
     robot = Robot.new
     name = robot.name
