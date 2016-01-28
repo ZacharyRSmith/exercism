@@ -1,25 +1,23 @@
 class Prime
-  @@primes = [2, 3]
 
   def self.nth(n)
     if n < 1 || !n.is_a?(Integer)
       raise ArgumentError.new('Argument must be a positive integer.')
     end
 
-    while !@@primes[n-1]
+    while !cache[n-1]
       Prime.add_next_prime
     end
 
-    @@primes[n-1]
+    cache[n-1]
   end
 
   def self.add_next_prime
-    found = false
-    num = @@primes[-1]
+    num = cache.last
 
-    while !found
+    loop do
       if Prime.isnt_multiple_of_cached_primes?(num)
-        @@primes << num
+        cache << num
         return
       end
       # only check odd numbers
@@ -28,6 +26,12 @@ class Prime
   end
 
   def self.isnt_multiple_of_cached_primes?(num)
-    @@primes.none? { |prime| num % prime == 0 }
+    cache.none? { |prime| num % prime == 0 }
   end
+
+  private
+
+    def self.cache
+      @primes ||= [2, 3]
+    end
 end
