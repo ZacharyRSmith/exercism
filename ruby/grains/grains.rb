@@ -1,17 +1,13 @@
 class Grains
+  def self.board
+    @board = (1..64).map { |sqr| 2**(sqr-1) }
+  end
 
-  def self.square(num)
-    # naive solution
-    sum = 0
-
-    for i in 1...num
-      sum += sum + 1
-    end
-
-    sum + 1
+  def self.square(n)
+    board[n-1]
   end
 
   def self.total
-    square(64) * 2 - 1
+    board.reduce(:+)
   end
 end
