@@ -13,9 +13,13 @@ class Sieve
 
   private
 
+  def _gen_candidate_primes(limit)
+    Set.new [2].concat( (3..limit).step(2).to_a )
+  end
+
   def _gen_primes_up_to_limit_inclusive(limit)
     # 2 and all odd numbers from 3 to limit inclusive
-    candidates = Set.new [2].concat( (3..limit).step(2).to_a )
+    candidates = _gen_candidate_primes(limit)
 
     candidates.each do |candidate|
       _remove_multiples(candidates, candidate, limit)
