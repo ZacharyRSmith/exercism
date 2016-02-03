@@ -18,11 +18,14 @@ class Sieve
     # Add all odd numbers from 3 to limit inclusive
     candidates.merge((3..limit).step(2).to_a)
 
-    (3..limit).step(2) do |n|
-      next unless candidates.include?(n)
-      ((2*n)..limit).step(n) { |multiple| candidates.delete(multiple) }
+    candidates.each do |candidate|
+      _remove_multiples(candidates, candidate)
     end
 
     candidates.to_a
+  end
+
+  def _remove_multiples(candiates, n)
+    ((2*n)..limit).step(n) { |multiple| candidates.delete(multiple) }
   end
 end
