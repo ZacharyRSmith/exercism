@@ -1,4 +1,5 @@
-#TODO: Refactor to use Set
+require 'set'
+
 
 class Sieve
   attr_reader :primes
@@ -7,37 +8,28 @@ class Sieve
     if !limit.is_a?(Integer) || limit < 2
       raise ArgumentError.new("Sieve's limit must be a positive integer above 1")
     end
-    @primes = _gen_primes(limit)
+    @primes = _get_primes_up_to_limit_inclusive(limit)
   end
 
   private
 
-  def _gen_primes(limit)
+  def _get_primes_up_to_limit_inclusive(limit)
     primes = [2]
-    multiples = { 2 => true }
-    crnt = 3
+    multiples = Set.new [2]
 
-    while crnt <= limit
-      if multiples[crnt]
-        crnt += 2
-        next
+    (3..limit).step(2) do |n|
+      if !multiples.include?(n)
+        primes << n
+        multiples = _mark_multiples(multiples, n, limit)
       end
-
-      primes << crnt
-      multiples = _mark_multiples(multiples, crnt, limit)
-      crnt += 2
     end
 
     primes
   end
 
   def _mark_multiples(multiples, start, stop)
-    # TODO Refactor to use reduce
-    multiple = start
-
-    while multiple <= stop
-      multiples[multiple] = true
-      multiple += start
+    (start..stop).step(start) do |multiple|
+      multiples.add(multiple)
     end
 
     multiples
