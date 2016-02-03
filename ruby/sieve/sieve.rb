@@ -14,22 +14,15 @@ class Sieve
   private
 
   def _gen_primes_up_to_limit_inclusive(limit)
-    primes = [2]
-    multiples = Set.new [2]
+    candidates = Set.new [2]
+    # Add all odd numbers from 3 to limit inclusive
+    candidates.merge((3..limit).step(2).to_a)
 
     (3..limit).step(2) do |n|
-      if !multiples.include?(n)
-        primes << n
-        _mark_multiples(multiples, n, limit)
-      end
+      next unless candidates.include?(n)
+      ((2*n)..limit).step(n) { |multiple| candidates.delete(multiple) }
     end
 
-    primes
-  end
-
-  def _mark_multiples(multiples, start, stop)
-    (start..stop).step(start) do |multiple|
-      multiples.add(multiple)
-    end
+    candidates.to_a
   end
 end
