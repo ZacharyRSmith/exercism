@@ -12,8 +12,8 @@ class WEST (object):
 
 DIRECTIONS = [NORTH, EAST, SOUTH, WEST]
 
+
 class Robot (object):
-    
 
     def __init__(self, bearing=NORTH, x=0, y=0):
         self.bearing = bearing
@@ -28,6 +28,15 @@ class Robot (object):
             self._add_y(-1)
         elif self.bearing == WEST:
             self._add_x(-1)
+
+    def simulate(self, arg):
+        for ltr in arg:
+            if ltr == "L":
+                self.turn_left()
+            elif ltr == "R":
+                self.turn_right()
+            elif ltr == "A":
+                self.advance()
 
     def turn_left(self):
         crnt_idx = DIRECTIONS.index(self.bearing)
@@ -52,37 +61,3 @@ class Robot (object):
         lst = list(self.coordinates)
         lst[1] += n
         self.coordinates = tuple(lst)
-        # t = ('275', '54000', '0.0', '5000.0', '0.0')
-        # lst = list(t)
-        # lst[0] = '300'
-        # t = tuple(lst)
-    
-# class Allergies (object):
-#     def __init__(self, allergy_score):
-#         # NOTE: I changed self.list to the pythonic self.lst
-#         self.lst = self.__gen_lst(allergy_score)
-
-#     def is_allergic_to(self, allergen):
-#         return allergen in self.lst
-
-#     def __gen_lst(self, allergy_score):
-#         allergens = {
-#             1: 'eggs',
-#             2: 'peanuts',
-#             4: 'shellfish',
-#             8: 'strawberries',
-#             16: 'tomatoes',
-#             32: 'chocolate',
-#             64: 'pollen',
-#             128: 'cats',
-#         }
-
-#         # This is part of a non-bitwise/binary solution:
-# #         for score, a in sorted(allergens.iteritems(), reverse=True):
-# #             if allergy_score >= score:
-# #                 lst.append(a)
-# #                 allergy_score -= score
-
-#         return [allergens[score] for score in allergens.keys()
-#                 if score & allergy_score > 0]
-

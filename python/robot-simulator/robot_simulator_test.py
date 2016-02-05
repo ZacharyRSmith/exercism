@@ -57,17 +57,17 @@ class RobotTests(unittest.TestCase):
         self.assertEqual((-4, 1), robot.coordinates)
         self.assertEqual(WEST, robot.bearing)
 
-    # def test_simulate_prog2(self):
-    #     robot = Robot(EAST, 2, -7)
-    #     robot.simulate("RRAAAAALA")
-    #     self.assertEqual((-3, -8), robot.coordinates)
-    #     self.assertEqual(SOUTH, robot.bearing)
+    def test_simulate_prog2(self):
+        robot = Robot(EAST, 2, -7)
+        robot.simulate("RRAAAAALA")
+        self.assertEqual((-3, -8), robot.coordinates)
+        self.assertEqual(SOUTH, robot.bearing)
 
-    # def test_simulate_prog3(self):
-    #     robot = Robot(SOUTH, 8, 4)
-    #     robot.simulate("LAAARRRALLLL")
-    #     self.assertEqual((11, 5), robot.coordinates)
-    #     self.assertEqual(NORTH, robot.bearing)
+    def test_simulate_prog3(self):
+        robot = Robot(SOUTH, 8, 4)
+        robot.simulate("LAAARRRALLLL")
+        self.assertEqual((11, 5), robot.coordinates)
+        self.assertEqual(NORTH, robot.bearing)
 
 if __name__ == '__main__':
     unittest.main()
