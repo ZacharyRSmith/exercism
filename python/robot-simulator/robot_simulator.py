@@ -10,11 +10,20 @@ class SOUTH (object):
 class WEST (object):
     pass
 
+DIRECTIONS = [NORTH, EAST, SOUTH, WEST]
 
 class Robot (object):
+    
+
     def __init__(self, bearing=NORTH, x=0, y=0):
         self.bearing = bearing
         self.coordinates = (x, y)
+
+    def turn_right(self):
+        crnt_idx = DIRECTIONS.index(self.bearing)
+        next_idx = (0 if crnt_idx == len(DIRECTIONS) - 1 else crnt_idx + 1)
+
+        self.bearing = DIRECTIONS[next_idx]
     
 # class Allergies (object):
 #     def __init__(self, allergy_score):
