@@ -24,14 +24,15 @@ class Robot (object):
         elif self.bearing == WEST:
             self._x -= 1
 
-    def simulate(self, commands):
-        for command in commands:
-            if command == "L":
-                self.turn_left()
-            elif command == "R":
-                self.turn_right()
-            elif command == "A":
-                self.advance()
+    def simulate(self, instruct):
+        commands = {
+            'A': self.advance,
+            'L': self.turn_left,
+            'R': self.turn_right
+        }
+
+        for command in instruct:
+            commands[command]()
 
     def turn_left(self):
         self.bearing = DIRECTIONS[(self.bearing - 1) % 4]
