@@ -19,6 +19,16 @@ class Robot (object):
         self.bearing = bearing
         self.coordinates = (x, y)
 
+    def advance(self):
+        if self.bearing == NORTH:
+            self._add_y(1)
+        elif self.bearing == EAST:
+            self._add_x(1)
+        elif self.bearing == SOUTH:
+            self._add_y(-1)
+        elif self.bearing == WEST:
+            self._add_x(-1)
+
     def turn_left(self):
         crnt_idx = DIRECTIONS.index(self.bearing)
         next_idx = (len(DIRECTIONS) - 1 if crnt_idx == 0 else crnt_idx - 1)
@@ -30,6 +40,22 @@ class Robot (object):
         next_idx = (0 if crnt_idx == len(DIRECTIONS) - 1 else crnt_idx + 1)
 
         self.bearing = DIRECTIONS[next_idx]
+
+    # PRIVATE METHODS
+
+    def _add_x(self, n):
+        lst = list(self.coordinates)
+        lst[0] += n
+        self.coordinates = tuple(lst)
+
+    def _add_y(self, n):
+        lst = list(self.coordinates)
+        lst[1] += n
+        self.coordinates = tuple(lst)
+        # t = ('275', '54000', '0.0', '5000.0', '0.0')
+        # lst = list(t)
+        # lst[0] = '300'
+        # t = tuple(lst)
     
 # class Allergies (object):
 #     def __init__(self, allergy_score):
