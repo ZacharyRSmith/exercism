@@ -19,6 +19,12 @@ class Robot (object):
         self.bearing = bearing
         self.coordinates = (x, y)
 
+    def turn_left(self):
+        crnt_idx = DIRECTIONS.index(self.bearing)
+        next_idx = (len(DIRECTIONS) - 1 if crnt_idx == 0 else crnt_idx - 1)
+
+        self.bearing = DIRECTIONS[next_idx]
+
     def turn_right(self):
         crnt_idx = DIRECTIONS.index(self.bearing)
         next_idx = (0 if crnt_idx == len(DIRECTIONS) - 1 else crnt_idx + 1)
