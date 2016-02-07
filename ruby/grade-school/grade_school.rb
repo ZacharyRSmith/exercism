@@ -1,4 +1,6 @@
 class School
+  VERSION = 1
+
   def initialize
     @hash = { }
   end
@@ -6,9 +8,14 @@ class School
   def add(name, grade)
     @hash[grade] ||= []
     @hash[grade] << name
+    @hash[grade].sort!
+  end
+
+  def grade(grade)
+    @hash[grade] ||= []
   end
 
   def to_h
-    @hash
+    Hash[@hash.sort]
   end
 end
