@@ -2,20 +2,23 @@ class School
   VERSION = 1
 
   def initialize
-    @hash = { }
+    @db = Hash.new { |hash, key| hash[key] = [] }
   end
 
   def add(name, grade)
-    @hash[grade] ||= []
-    @hash[grade] << name
-    @hash[grade].sort!
+    db[grade] << name
+    db[grade].sort!
   end
 
   def grade(grade)
-    @hash[grade] ||= []
+    db[grade]
   end
 
   def to_h
-    Hash[@hash.sort]
+    Hash[db.sort]
   end
+
+  private
+
+    attr_reader :db
 end
