@@ -1,4 +1,7 @@
 class PhoneNumber
+  INVALID_NUMBER = '0000000000'
+  JUST_TEN_DIGITS = /\A\d{10}\z/
+
   def initialize(number)
     @number = _clean_number(number)
   end
@@ -22,20 +25,22 @@ class PhoneNumber
   private
 
     def _clean_number(str)
-      return '0000000000' if str.match(/[a-zA-Z]/)
-
-      digits = str.gsub(/\D/, '')
-      return '0000000000' if digits.size < 10
-      return '0000000000' if digits.size > 11
-
-      if digits.size == 11
-        if digits[0] == '1'
-          return digits[1..digits.size]
-        else
-          return '0000000000'
-        end
-      end
+      digits = _remove_punct_and_space(str)
+      digits = _remove_leading_1(digits)
+      return INVALID_NUMBER if digits !~ JUST_TEN_DIGITS
 
       digits
+    end
+
+    def _remove_leading_1(str)
+      if str.size == 11 && str[0] == '1'
+        return str[1..str.size]
+      else
+        return str
+      end
+    end
+
+    def _remove_punct_and_space(str)
+      str.gsub(/[[:punct:][:space:]]/, '')
     end
 end
