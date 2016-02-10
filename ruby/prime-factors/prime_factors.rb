@@ -1,6 +1,7 @@
 class PrimeFactors
+
   def self.for(num)
-    res = []
+    factors = []
 
     factor = 2
     while factor <= num
@@ -9,11 +10,11 @@ class PrimeFactors
         next
       end
 
-      res << factor
+      factors << factor
       num /= factor
     end
 
-    res
+    factors
   end
 
   # PRIVATE CLASS METHODS
@@ -24,7 +25,7 @@ class PrimeFactors
     private_class_method :_add_to_factor
 
     def self._is_factor(num, factor)
-      num % factor == 0
+      (num % factor).zero?
     end
     private_class_method :_is_factor
 end
