@@ -10,16 +10,21 @@ class PhoneNumber
 
   @property
   def area_code
-    "#{number[0..2]}"
+    number[0, 3]
+  end
+
+  @property
+  def exchange_number
+    number[3, 3]
   end
 
   @property
   def subscriber_number
-    "#{number[3..5]}-#{number[6..9]}"
+    number[6, 4]
   end
 
   def to_s
-    "(#{area_code}) #{subscriber_number}"
+    format "(%03d) %03d-%04d", area_code, exchange_number, subscriber_number
   end
 
   private
