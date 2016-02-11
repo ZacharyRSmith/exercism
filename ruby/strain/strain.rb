@@ -1,9 +1,11 @@
-class Array
-  def discard
-    self.delete_if { |e| yield(e) }
+module Strain
+  def discard(&block)
+    new_ary = []
+    self.each { |e| new_ary << e unless yield(e) }
+    new_ary
   end
 
-  def keep(&predicate)
+  def keep(&block)
     # CHEATING SOLUTION 1
     # self.delete_if { |e| !yield(e) }
 
@@ -22,6 +24,8 @@ class Array
       new_ary << self[i] if yield(self[i])
     end
 
-    self.replace new_ary
+    new_ary
   end
 end
+
+Array.send :include, Strain
