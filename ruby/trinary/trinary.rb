@@ -8,11 +8,10 @@ class Trinary
   def to_decimal
     return INVALID_INPUT_RESULT if /[^0-2]/.match(trinary)
 
-    i = -1
-    trinary.reverse.each_char.inject(0) do |mem, ltr|
-      i += 1
+    trinary.reverse.chars.each_with_index.inject(0) do |mem, (ltr, i)|
       n = ltr.to_i
-      mem += (n * 3**i)
+      val = n * 3**i
+      mem += val
     end
   end
 

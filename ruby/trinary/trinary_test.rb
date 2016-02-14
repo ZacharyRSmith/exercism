@@ -40,6 +40,14 @@ class TrinaryTest < Minitest::Test
     assert_equal 0, Trinary.new('carrot').to_decimal
   end
 
+  def test_invalid_trinary_by_9_is_decimal_0
+    assert_equal 0, Trinary.new('9').to_decimal
+  end
+
+  def test_invalid_trinary_after_newline_is_decimal_0
+    assert_equal 0, Trinary.new('012\n019').to_decimal
+  end
+
   def test_invalid_trinary_with_digits_is_decimal_0
     assert_equal 0, Trinary.new('0a1b2c').to_decimal
   end
