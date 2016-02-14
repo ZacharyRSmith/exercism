@@ -9,7 +9,7 @@ class Trinary
     return INVALID_INPUT_RESULT if /[^0-2]/.match(trinary)
 
     i = -1
-    trinary.split('').reverse_each.inject(0) do |mem, ltr|
+    trinary.reverse.each_char.inject(0) do |mem, ltr|
       i += 1
       n = ltr.to_i
       mem += (n * 3**i)
@@ -17,6 +17,5 @@ class Trinary
   end
 
   private
-
     attr_reader :trinary
 end
