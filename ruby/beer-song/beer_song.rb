@@ -12,8 +12,7 @@ class BeerSong
   def verses(start, stop)
     raise ArgumentError.new("Last verse must be after first verse") if stop > start
 
-    verses = start.downto(stop).inject('') { |mem, num| mem + _get_verse(num) + "\n" }
-    verses[0..-2] # remove last \n
+    start.downto(stop).inject([]) { |mem, num| mem << _get_verse(num) }.join("\n")
   end
 
   private
