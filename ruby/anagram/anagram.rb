@@ -12,8 +12,8 @@ class Anagram
 
     def _is_anagram?(candidate)
       candidate_normalized = _normalize(candidate)
-      return false if candidate_normalized == original_word_normalized
-      _sort(candidate_normalized) == original_word_sorted
+      return candidate_normalized != original_word_normalized &&
+          _sort(candidate_normalized) == original_word_sorted
     end
 
     def _normalize(arg) arg.downcase end
