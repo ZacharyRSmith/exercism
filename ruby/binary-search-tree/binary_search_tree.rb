@@ -1,39 +1,32 @@
 class Bst
   def initialize(data)
     @data = data
-    @leftChild = nil
-    @rightChild = nil
+    @children = { }
   end
 
   attr_reader :data
 
   def each(&block)
-    @leftChild.each(&block) if @leftChild
+    @children['left'].each(&block) if @children['left']
     yield @data
-    @rightChild.each(&block) if @rightChild
+    @children['right'].each(&block) if @children['right']
   end
 
   def left
-    @leftChild
+    @children['left']
   end
   
   def insert(newData)
-    if newData > data
-      if @rightChild
-        @rightChild.insert(newData)
-      else
-        @rightChild = self.class.new(newData)
-      end
+    side = (newData > data ? 'right' : 'left')
+
+    if @children[side]
+      @children[side].insert(newData)
     else
-      if @leftChild
-        @leftChild.insert(newData)
-      else
-        @leftChild = self.class.new(newData)
-      end
+      @children[side] = self.class.new(newData)
     end
   end
 
   def right
-    @rightChild
+    @children['right']
   end
 end
