@@ -7,9 +7,9 @@ class Bst
   attr_reader :data
 
   def each(&block)
-    children['left'].each(&block) if children['left']
+    children['left'].each(&block) unless children['left'].nil?
     yield @data
-    children['right'].each(&block) if children['right']
+    children['right'].each(&block) unless children['right'].nil?
   end
 
   def left
