@@ -41,32 +41,27 @@ class CryptoTest < Minitest::Test
   end
 
   def test_plaintext_segments
-    skip
     crypto = Crypto.new('Never vex thine heart with idle woes')
     expected = %w(neverv exthin eheart withid lewoes)
     assert_equal expected, crypto.plaintext_segments
   end
 
   def test_other_plaintext_segments
-    skip
     crypto = Crypto.new('ZOMG! ZOMBIES!!!')
     assert_equal %w(zomg zomb ies), crypto.plaintext_segments
   end
 
   def test_ciphertext
-    skip
     crypto = Crypto.new('Time is an illusion. Lunchtime doubly so.')
     assert_equal 'tasneyinicdsmiohooelntuillibsuuml', crypto.ciphertext
   end
 
   def test_another_ciphertext
-    skip
     crypto = Crypto.new('We all know interspecies romance is weird.')
     assert_equal 'wneiaweoreneawssciliprerlneoidktcms', crypto.ciphertext
   end
 
   def test_normalized_ciphertext
-    skip
     crypto = Crypto.new('Vampires are people too!')
     assert_equal 'vrel aepe mset paoo irpo', crypto.normalize_ciphertext
   end
