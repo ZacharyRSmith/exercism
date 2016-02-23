@@ -25,13 +25,11 @@ class CryptoTest < Minitest::Test
   end
 
   def test_size_of_slightly_larger_square
-    skip
     crypto = Crypto.new('123456789')
     assert_equal 3, crypto.size
   end
 
   def test_size_of_non_perfect_square
-    skip
     crypto = Crypto.new('123456789abc')
     assert_equal 4, crypto.size
   end
