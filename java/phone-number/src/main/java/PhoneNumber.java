@@ -1,18 +1,9 @@
 public class PhoneNumber {
-
-  private static String number;
+  private String number;
+  private final String WRONG_NUMBER = "0000000000";
 
   PhoneNumber(String input) {
-    String inputClean = input.replaceAll("[^\\d]", "");
-    if (inputClean.length() == 10) {
-      this.number = inputClean;
-    } else {
-      if (inputClean.substring(0, 1).equals("1") && inputClean.length() == 11) {
-        this.number = inputClean.substring(1);
-      } else {
-        this.number = "0000000000";
-      }
-    }
+    setNumber(input);
   }
 
   public final String getAreaCode() {
@@ -24,8 +15,27 @@ public class PhoneNumber {
   }
 
   public final String pretty() {
-    String areaCode = this.getAreaCode();
-    String num = this.number;
-    return "(" + areaCode + ")" + " " + num.substring(3, 6) + "-" + num.substring(6);
+    return String.format("(%s) %s-%s",
+      this.getAreaCode(),
+      this.number.substring(3, 6),
+      this.number.substring(6));
+  }
+
+  private final void setNumber(String input) {
+    String onlyDigits = input.replaceAll("\\D", "");
+    if (isFullUSNumber(onlyDigits)) {
+      this.number = onlyDigits.substring(1);
+      return;
+    }
+    if (onlyDigits.length() != 10) {
+      this.number = WRONG_NUMBER;
+      return;
+    }
+
+    this.number = onlyDigits;
+  }
+
+  private static final boolean isFullUSNumber(String onlyDigits) {
+    return onlyDigits.length() == 11 && onlyDigits.substring(0, 1).equals("1");
   }
 }
