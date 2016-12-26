@@ -2,6 +2,7 @@ import static org.fest.assertions.api.Assertions.assertThat;
 import static org.fest.assertions.api.Assertions.entry;
 
 import org.junit.Test;
+import org.junit.Ignore;
 
 public class NucleotideTest {
   @Test
