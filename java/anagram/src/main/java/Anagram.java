@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -11,12 +10,12 @@ public class Anagram {
 
   private final String matcher;
 
-  private final ArrayList<String> matcherLtrs;
+  private final String matcherLetters;
 
   public Anagram(String matcher) {
     this.matcher = matcher.toLowerCase();
 
-    this.matcherLtrs = this.getSortedLtrs(this.matcher);
+    this.matcherLetters = this.getNormalizedLetters(this.matcher);
   }
 
   /**
@@ -34,18 +33,18 @@ public class Anagram {
     return res;
   }
 
-  private final ArrayList<String> getSortedLtrs(String word) {
-    ArrayList<String> ltrs = new ArrayList<String>(Arrays.asList(word.split("")));
-    Collections.sort(ltrs);
-    return ltrs;
+  private final String getNormalizedLetters(String word) {
+    char[] letters = word.toCharArray();
+    Arrays.sort(letters);
+    return new String(letters);
   }
 
-  private final boolean isAnagram(String pCandidate) {
+  private final boolean isAnagram(final String pCandidate) {
     String candidate = pCandidate.toLowerCase();
     if (candidate.equals(this.matcher)) return false;
 
-    ArrayList<String> candidateLtrs = getSortedLtrs(candidate);
+    String candidateLetters = getNormalizedLetters(candidate);
 
-    return candidateLtrs.equals(this.matcherLtrs);
+    return candidateLetters.equals(this.matcherLetters);
   }
 }
