@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="SpaceAgeTest" tests="9" skipped="8" failures="0" errors="0" timestamp="2016-12-26T20:52:47" hostname="Zacharys-MacBook-Pro.local" time="0.008">
+  <properties/>
+  <testcase name="ageOnSaturn" classname="SpaceAgeTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="ageOnUranus" classname="SpaceAgeTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="ageOnJupiter" classname="SpaceAgeTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="ageInSeconds" classname="SpaceAgeTest" time="0.002"/>
+  <testcase name="ageOnMercury" classname="SpaceAgeTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="ageOnEarth" classname="SpaceAgeTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="ageOnVenus" classname="SpaceAgeTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="ageOnMars" classname="SpaceAgeTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="ageOnNeptune" classname="SpaceAgeTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
