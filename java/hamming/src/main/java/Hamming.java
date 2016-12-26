@@ -1,3 +1,5 @@
+import java.util.stream.IntStream;
+
 /**
  * Calculates the Hamming difference between two DNA strands.
  */
@@ -12,12 +14,11 @@ public class Hamming {
       throw new IllegalArgumentException("Strands must be of equal length.");
     }
 
-    int res = 0;
-
-    for (int i = 0; i < a.length(); i++) {
-      if (a.charAt(i) != b.charAt(i)) res++;
-    }
-
-    return res;
+    return IntStream.range(0, a.length())
+      .map(i ->
+        a.charAt(i) == b.charAt(i)
+          ? 0
+          : 1)
+      .sum();
   }
 }
