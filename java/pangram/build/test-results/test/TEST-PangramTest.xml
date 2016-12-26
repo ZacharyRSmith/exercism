@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="PangramTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2016-12-26T13:28:57" hostname="Zacharys-MacBook-Pro.local" time="0.012">
+<testsuite name="PangramTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2016-12-26T13:38:03" hostname="Zacharys-MacBook-Pro.local" time="0.007">
   <properties/>
-  <testcase name="anotherMissingCharacterX" classname="PangramTest" time="0.003"/>
+  <testcase name="anotherMissingCharacterX" classname="PangramTest" time="0.001"/>
   <testcase name="missingLettersReplacedByNumbers" classname="PangramTest" time="0.0"/>
   <testcase name="pangramWithMixedCaseAndPunctuation" classname="PangramTest" time="0.0"/>
   <testcase name="pangramWithOnlyLowerCase" classname="PangramTest" time="0.0"/>
   <testcase name="pangramWithNumbers" classname="PangramTest" time="0.0"/>
-  <testcase name="pangramWithUnderscores" classname="PangramTest" time="0.0"/>
-  <testcase name="panagramInAlphabetOtherThanAscii" classname="PangramTest" time="0.005"/>
+  <testcase name="pangramWithUnderscores" classname="PangramTest" time="0.001"/>
+  <testcase name="panagramInAlphabetOtherThanAscii" classname="PangramTest" time="0.002"/>
   <testcase name="sentenceEmpty" classname="PangramTest" time="0.0"/>
   <testcase name="pangramWithNonAsciiCharacters" classname="PangramTest" time="0.001"/>
   <testcase name="missingCharacterX" classname="PangramTest" time="0.0"/>

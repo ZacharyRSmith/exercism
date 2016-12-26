@@ -1,24 +1,20 @@
-import java.util.HashMap;
+import java.util.HashSet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Pangrams {
 
   public static boolean isPangram(String input) {
     if (input.length() < 26) return false;
-    String inputClean = input.toLowerCase().replaceAll("[^a-z]", "");
-    // TODO use Set instead of HashMap
-    HashMap<Character, Boolean> numChars = new HashMap<Character, Boolean>();
+    String inputNorm = input.toLowerCase();
+    HashSet<String> ltrsSeen = new HashSet<String>();
 
-    for (int i = 0; i < inputClean.length(); i++) {
-      char ltr = inputClean.charAt(i);
-      if (numChars.containsKey(ltr)) continue;
-
-      numChars.put(ltr, true);
-
-      if (numChars.size() == 26) {
-        return true;
-      }
+    Pattern pattern = Pattern.compile("[a-z]");
+    Matcher matcher = pattern.matcher(inputNorm);
+    while (matcher.find()) {
+      ltrsSeen.add(matcher.group());
     }
 
-    return false;
+    return ltrsSeen.size() == 26;
   }
 }
