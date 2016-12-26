@@ -1,3 +1,4 @@
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -6,6 +7,7 @@ public class BobTest {
     private final Bob bob = new Bob();
 
     @Test
+    // @Ignore
     public void saySomething() {
         assertEquals(
             "Whatever.",
@@ -14,6 +16,7 @@ public class BobTest {
     }
 
     @Test
+    // @Ignore
     public void shouting() {
         assertEquals(
             "Whoa, chill out!",
@@ -22,6 +25,7 @@ public class BobTest {
     }
 
     @Test
+    // @Ignore
     public void askingAQuestion() {
         assertEquals(
             "Sure.",
@@ -30,6 +34,7 @@ public class BobTest {
     }
 
     @Test
+    // @Ignore
     public void askingANumericQuestion() {
         assertEquals(
             "Sure.",
@@ -38,6 +43,7 @@ public class BobTest {
     }
 
     @Test
+    // @Ignore
     public void talkingForcefully() {
         assertEquals(
             "Whatever.",
@@ -46,6 +52,7 @@ public class BobTest {
     }
 
     @Test
+    // @Ignore
     public void usingAcronymsInRegularSpeech() {
         assertEquals(
             "Whatever.", bob.hey("It's OK if you don't want to go to the DMV.")
@@ -53,6 +60,7 @@ public class BobTest {
     }
 
     @Test
+    // @Ignore
     public void forcefulQuestions() {
         assertEquals(
             "Whoa, chill out!", bob.hey("WHAT THE HELL WERE YOU THINKING?")
@@ -60,6 +68,7 @@ public class BobTest {
     }
 
     @Test
+    // @Ignore
     public void shoutingNumbers() {
         assertEquals(
             "Whoa, chill out!", bob.hey("1, 2, 3 GO!")
@@ -67,6 +76,7 @@ public class BobTest {
     }
 
     @Test
+    // @Ignore
     public void onlyNumbers() {
         assertEquals(
             "Whatever.", bob.hey("1, 2, 3")
@@ -74,6 +84,7 @@ public class BobTest {
     }
 
     @Test
+    // @Ignore
     public void questionWithOnlyNumbers() {
         assertEquals(
             "Sure.", bob.hey("4?")
@@ -81,6 +92,7 @@ public class BobTest {
     }
 
     @Test
+    // @Ignore
     public void shoutingWithSpecialCharacters() {
         assertEquals(
             "Whoa, chill out!", bob.hey("ZOMG THE %^*@#$(*^ ZOMBIES ARE COMING!!11!!1!")
@@ -88,6 +100,7 @@ public class BobTest {
     }
 
     @Test
+    // @Ignore
     public void shoutingWithUmlauts() {
         assertEquals(
             "Whoa, chill out!", bob.hey("\u00dcML\u00c4\u00dcTS!")
@@ -95,6 +108,7 @@ public class BobTest {
     }
 
     @Test
+    // @Ignore
     public void calmlySpeakingWithUmlauts() {
         assertEquals(
             "Whatever.", bob.hey("\u00dcML\u00e4\u00dcTS!")
@@ -102,6 +116,7 @@ public class BobTest {
     }
 
     @Test
+    // @Ignore
     public void shoutingWithNoExclamationMark() {
         assertEquals(
             "Whoa, chill out!", bob.hey("I HATE YOU")
@@ -109,6 +124,7 @@ public class BobTest {
     }
 
     @Test
+    // @Ignore
     public void statementContainingQuestionMark() {
         assertEquals(
             "Whatever.", bob.hey("Ending with ? means a question.")
@@ -116,6 +132,7 @@ public class BobTest {
     }
 
     @Test
+    // @Ignore
     public void prattlingOn() {
         assertEquals(
             "Sure.", bob.hey("Wait! Hang on. Are you going to be OK?")
@@ -123,6 +140,7 @@ public class BobTest {
     }
 
     @Test
+    // @Ignore
     public void silence() {
         assertEquals(
             "Fine. Be that way!", bob.hey("")
@@ -130,6 +148,7 @@ public class BobTest {
     }
 
     @Test
+    // @Ignore
     public void prolongedSilence() {
         assertEquals(
             "Fine. Be that way!", bob.hey("    ")
