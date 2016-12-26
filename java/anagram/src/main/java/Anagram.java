@@ -1,6 +1,6 @@
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -11,12 +11,12 @@ public class Anagram {
 
   private final String matcher;
 
-  private final HashMap<Character, Integer> charCounts;
+  private final ArrayList<String> matcherLtrs;
 
   public Anagram(String matcher) {
     this.matcher = matcher.toLowerCase();
 
-    this.charCounts = getCharCounts(this.matcher);
+    this.matcherLtrs = this.getSortedLtrs(this.matcher);
   }
 
   /**
@@ -26,7 +26,7 @@ public class Anagram {
     ArrayList<String> res = new ArrayList<String>();
 
     for (String candidate : candidates) {
-      if (isCandidate(candidate)) {
+      if (isAnagram(candidate)) {
         res.add(candidate);
       }
     }
@@ -34,35 +34,18 @@ public class Anagram {
     return res;
   }
 
-  private final boolean isCandidate(String candidate) {
-    candidate = candidate.toLowerCase();
+  private final ArrayList<String> getSortedLtrs(String word) {
+    ArrayList<String> ltrs = new ArrayList<String>(Arrays.asList(word.split("")));
+    Collections.sort(ltrs);
+    return ltrs;
+  }
+
+  private final boolean isAnagram(String pCandidate) {
+    String candidate = pCandidate.toLowerCase();
     if (candidate.equals(this.matcher)) return false;
-    HashMap<Character, Integer> candidateCharCounts = getCharCounts(candidate);
-    if (candidateCharCounts.size() != this.charCounts.size()) return false;
 
-    for (Map.Entry<Character, Integer> e : candidateCharCounts.entrySet()) {
-      if (!isCountSame(e)) return false;
-    }
+    ArrayList<String> candidateLtrs = getSortedLtrs(candidate);
 
-    return true;
-  }
-
-  private final boolean isCountSame(final Map.Entry<Character, Integer> e) {
-    if (!this.charCounts.containsKey(e.getKey())) return false;
-    int matcherCounts = this.charCounts.get(e.getKey());
-    int candidateCounts = e.getValue();
-
-    return matcherCounts == candidateCounts;
-  }
-
-  private final HashMap<Character, Integer> getCharCounts(final String word) {
-    HashMap<Character, Integer> res = new HashMap<Character, Integer>();
-
-    for (char ch : word.toCharArray()) {
-      if (!res.containsKey(ch)) res.put(ch, 0);
-      res.put(ch, res.get(ch) + 1);
-    }
-
-    return res;
+    return candidateLtrs.equals(this.matcherLtrs);
   }
 }
