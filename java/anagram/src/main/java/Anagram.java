@@ -7,48 +7,53 @@ public class Anagram {
 
   private final String matcher;
 
-  private final HashMap<Character, Integer> charCounts = new HashMap<Character, Integer>();
+  private final HashMap<Character, Integer> charCounts;
 
   public Anagram(String matcher) {
     this.matcher = matcher.toLowerCase();
 
-    for (char ch : this.matcher.toCharArray()) {
-      if (!charCounts.containsKey(ch)) charCounts.put(ch, 0);
-      int crntCount = charCounts.get(ch);
-      charCounts.put(ch, crntCount + 1);
-    }
+    this.charCounts = getCharCounts(this.matcher);
   }
 
   public final ArrayList<String> match(List<String> candidates) {
     ArrayList<String> res = new ArrayList<String>();
 
-    for (String pCandidate : candidates) {
-      String candidate = pCandidate.toLowerCase();
-      if (candidate.equals(this.matcher)) continue;
-      HashMap<Character, Integer> candidateCharCounts = new HashMap<Character, Integer>();
-
-      for (char ch : candidate.toCharArray()) {
-        if (!candidateCharCounts.containsKey(ch)) candidateCharCounts.put(ch, 0);
-        int crntCount = candidateCharCounts.get(ch);
-        candidateCharCounts.put(ch, crntCount + 1);
+    for (String candidate : candidates) {
+      if (isCandidate(candidate)) {
+        res.add(candidate);
       }
+    }
 
-      if (candidateCharCounts.size() != this.charCounts.size()) continue;
+    return res;
+  }
 
-      res.add(pCandidate);
+  private final boolean isCandidate(String candidate) {
+    candidate = candidate.toLowerCase();
+    if (candidate.equals(this.matcher)) return false;
+    HashMap<Character, Integer> candidateCharCounts = getCharCounts(candidate);
+    if (candidateCharCounts.size() != this.charCounts.size()) return false;
 
-      for (Map.Entry<Character, Integer> e : candidateCharCounts.entrySet()) {
-        if (!this.charCounts.containsKey(e.getKey())) {
-          res.remove(pCandidate);
-          break;
-        }
-        int matcherCounts = this.charCounts.get(e.getKey());
-        int candidateCounts = e.getValue();
-        if (matcherCounts != candidateCounts) {
-          res.remove(pCandidate);
-          break;
-        }
-      }
+    for (Map.Entry<Character, Integer> e : candidateCharCounts.entrySet()) {
+      if (!isCountSame(e)) return false;
+    }
+
+    return true;
+  }
+
+  private final boolean isCountSame(final Map.Entry<Character, Integer> e) {
+    if (!this.charCounts.containsKey(e.getKey())) return false;
+    int matcherCounts = this.charCounts.get(e.getKey());
+    int candidateCounts = e.getValue();
+
+    return matcherCounts == candidateCounts;
+  }
+
+  private final HashMap<Character, Integer> getCharCounts(final String word) {
+    HashMap<Character, Integer> res = new HashMap<Character, Integer>();
+
+    for (char ch : word.toCharArray()) {
+      if (!res.containsKey(ch)) res.put(ch, 0);
+      res.put(ch, res.get(ch) + 1);
     }
 
     return res;
