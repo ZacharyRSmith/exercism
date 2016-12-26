@@ -3,6 +3,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
 
+/**
+ * When instantiated with a given word,
+ * then this instance can select anagrams from a list of candidates.
+ */
 public class Anagram {
 
   private final String matcher;
@@ -15,6 +19,9 @@ public class Anagram {
     this.charCounts = getCharCounts(this.matcher);
   }
 
+  /**
+   * Returns the subset of @param candidates that are anagrams of this instance.
+   */
   public final ArrayList<String> match(List<String> candidates) {
     ArrayList<String> res = new ArrayList<String>();
 
