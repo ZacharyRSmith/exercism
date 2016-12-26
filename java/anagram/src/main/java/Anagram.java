@@ -12,7 +12,7 @@ public class Anagram {
 
   private final String matcherLetters;
 
-  public Anagram(String matcher) {
+  public Anagram(final String matcher) {
     this.matcher = matcher.toLowerCase();
 
     this.matcherLetters = this.getNormalizedLetters(this.matcher);
@@ -21,7 +21,7 @@ public class Anagram {
   /**
    * Returns the subset of @param candidates that are anagrams of this instance.
    */
-  public final ArrayList<String> match(List<String> candidates) {
+  public final ArrayList<String> match(final List<String> candidates) {
     ArrayList<String> res = new ArrayList<String>();
 
     for (String candidate : candidates) {
@@ -33,8 +33,8 @@ public class Anagram {
     return res;
   }
 
-  private final String getNormalizedLetters(String word) {
-    char[] letters = word.toCharArray();
+  private final String getNormalizedLetters(final String word) {
+    final char[] letters = word.toCharArray();
     Arrays.sort(letters);
     return new String(letters);
   }
