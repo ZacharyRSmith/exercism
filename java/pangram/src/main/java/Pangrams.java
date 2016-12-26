@@ -1,20 +1,13 @@
-import java.util.HashSet;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class Pangrams {
 
-  public static boolean isPangram(String input) {
-    if (input.length() < 26) return false;
-    String inputNorm = input.toLowerCase();
-    HashSet<String> ltrsSeen = new HashSet<String>();
+  public static boolean isPangram(final String input) {
+    String inputClean = input.toLowerCase().replace("[^a-z]", "");
+    if (inputClean.length() < 26) return false;
 
-    Pattern pattern = Pattern.compile("[a-z]");
-    Matcher matcher = pattern.matcher(inputNorm);
-    while (matcher.find()) {
-      ltrsSeen.add(matcher.group());
+    for (char ch = 'a'; ch <= 'z'; ch++) {
+      if (inputClean.indexOf(ch) < 0) return false;
     }
 
-    return ltrsSeen.size() == 26;
+    return true;
   }
 }
