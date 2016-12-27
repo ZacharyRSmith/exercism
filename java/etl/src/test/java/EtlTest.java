@@ -1,5 +1,6 @@
 import com.google.common.collect.ImmutableMap;
 import org.junit.Test;
+import org.junit.Ignore;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,6 +20,7 @@ public class EtlTest {
     }
 
     @Test
+    // @Ignore
     public void testTransformMoreValues() {
         Map<Integer, List<String>> old = ImmutableMap.of(
                 1, Arrays.asList("A", "E", "I", "O", "U")
@@ -35,6 +37,7 @@ public class EtlTest {
     }
 
     @Test
+    // @Ignore
     public void testMoreKeys() {
         Map<Integer, List<String>> old = ImmutableMap.of(
                 1, Arrays.asList("A", "E"),
@@ -51,6 +54,7 @@ public class EtlTest {
     }
 
     @Test
+    // @Ignore
     public void testFullDataset() {
         Map<Integer, List<String>> old = ImmutableMap.<Integer, List<String>>builder().
                 put(1, Arrays.asList("A", "E", "I", "O", "U", "L", "N", "R", "S", "T")).
