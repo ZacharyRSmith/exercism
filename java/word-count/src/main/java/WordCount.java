@@ -5,15 +5,18 @@ public class WordCount {
   public Map<String, Integer> Phrase(String input) {
     Map<String, Integer> res = new HashMap<String, Integer>();
 
-    String[] ary = input.toLowerCase().split("\\W+");
-
-    for (String word : ary) {
-      if (!res.containsKey(word)) res.put(word, 0);
-      int crnt = res.get(word);
-
-      res.put(word, crnt + 1);
+    for (String word : input.toLowerCase().split("\\W+")) {
+      incrementCount(res, word);
     }
 
     return res;
+  }
+
+  private void incrementCount(Map<String, Integer> map, String word) {
+    if (!map.containsKey(word)) map.put(word, 0);
+
+    int crnt = map.get(word);
+
+    map.put(word, crnt + 1);
   }
 }
