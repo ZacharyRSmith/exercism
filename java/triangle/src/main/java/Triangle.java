@@ -1,21 +1,10 @@
-
-
 /**
  * Tells type of triangle.
  */
 public class Triangle {
   private TriangleKind kind;
 
-  Triangle(double pX, double pY, double pZ) throws TriangleException {
-    // laaazy
-    int x = (int)(pX * 10);
-    int y = (int)(pY * 10);
-    int z = (int)(pZ * 10);
-    if (!isValidInput(x, y, z)) throw new TriangleException();
-    setKind(x, y, z);
-  }
-
-  Triangle(int x, int y, int z) throws TriangleException {
+  Triangle(double x, double y, double z) throws TriangleException {
     if (!isValidInput(x, y, z)) throw new TriangleException();
     setKind(x, y, z);
   }
@@ -24,7 +13,7 @@ public class Triangle {
     return this.kind;
   }
 
-  private boolean isValidInput(int x, int y, int z) {
+  private boolean isValidInput(double x, double y, double z) {
     if (x <= 0 || y <= 0 || z <= 0) return false;
     // The following line validates the triangle inequality theorem: z ≤ x + y
     // where x,y, and z are the lengths of the sides of a triangle. In other words, the
@@ -34,15 +23,13 @@ public class Triangle {
     return true;
   }
 
-  private void setKind(int x, int y, int z) {
+  private void setKind(double x, double y, double z) {
     if (x == y && y == z) {
       this.kind = TriangleKind.EQUILATERAL;
-      return;
-    }
-    if (x == y || y == z || x == z) {
+    } else if (x == y || y == z || x == z) {
       this.kind = TriangleKind.ISOSCELES;
-      return;
+    } else {
+      this.kind = TriangleKind.SCALENE;
     }
-    this.kind = TriangleKind.SCALENE;
   }
 }

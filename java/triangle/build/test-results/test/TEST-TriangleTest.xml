@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="TriangleTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2016-12-27T22:49:15" hostname="Zacharys-MacBook-Pro.local" time="0.006">
+<testsuite name="TriangleTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2016-12-27T22:55:46" hostname="Zacharys-MacBook-Pro.local" time="0.005">
   <properties/>
   <testcase name="isoscelesTrianglesHaveLastTwoSidesEqual" classname="TriangleTest" time="0.002"/>
   <testcase name="equilateralTriangleHaveEqualSides" classname="TriangleTest" time="0.0"/>
-  <testcase name="trianglesViolatingTriangleInequalityAreIllegal" classname="TriangleTest" time="0.001"/>
+  <testcase name="trianglesViolatingTriangleInequalityAreIllegal" classname="TriangleTest" time="0.0"/>
   <testcase name="scaleneTrianglesHaveNoEqualSides" classname="TriangleTest" time="0.0"/>
   <testcase name="isoscelesTrianglesHaveFirstAndLastSidesEqual" classname="TriangleTest" time="0.0"/>
   <testcase name="trianglesWithNegativeSidesAreIllegal" classname="TriangleTest" time="0.0"/>
