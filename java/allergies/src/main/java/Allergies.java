@@ -23,7 +23,8 @@ public class Allergies {
     List<Allergen> res = new ArrayList<Allergen>();
 
     for (Allergen allergen : Allergen.values()) {
-      if ((allergen.getScore() & score) != 0) res.add(allergen);
+      if (score % 2 == 1) res.add(allergen);
+      score /= 2;
     }
 
     return res;
