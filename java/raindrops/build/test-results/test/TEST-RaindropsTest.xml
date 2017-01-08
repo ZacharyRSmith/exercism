@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="RaindropsTest" tests="16" skipped="0" failures="0" errors="0" timestamp="2017-01-08T16:06:46" hostname="Zacharys-MacBook-Pro.local" time="0.013">
+<testsuite name="RaindropsTest" tests="16" skipped="0" failures="0" errors="0" timestamp="2017-01-08T16:11:16" hostname="Zacharys-MacBook-Pro.local" time="0.007">
   <properties/>
   <testcase name="test[0: expected input number 1 to be converted to &quot;1&quot;]" classname="RaindropsTest" time="0.001"/>
   <testcase name="test[1: expected input number 52 to be converted to &quot;52&quot;]" classname="RaindropsTest" time="0.0"/>
   <testcase name="test[2: expected input number 12,121 to be converted to &quot;12121&quot;]" classname="RaindropsTest" time="0.0"/>
-  <testcase name="test[3: expected input number 3 to be converted to &quot;Pling&quot;]" classname="RaindropsTest" time="0.001"/>
+  <testcase name="test[3: expected input number 3 to be converted to &quot;Pling&quot;]" classname="RaindropsTest" time="0.0"/>
   <testcase name="test[4: expected input number 6 to be converted to &quot;Pling&quot;]" classname="RaindropsTest" time="0.0"/>
   <testcase name="test[5: expected input number 9 to be converted to &quot;Pling&quot;]" classname="RaindropsTest" time="0.0"/>
   <testcase name="test[6: expected input number 5 to be converted to &quot;Plang&quot;]" classname="RaindropsTest" time="0.0"/>
@@ -16,7 +16,7 @@
   <testcase name="test[12: expected input number 15 to be converted to &quot;PlingPlang&quot;]" classname="RaindropsTest" time="0.0"/>
   <testcase name="test[13: expected input number 21 to be converted to &quot;PlingPlong&quot;]" classname="RaindropsTest" time="0.0"/>
   <testcase name="test[14: expected input number 35 to be converted to &quot;PlangPlong&quot;]" classname="RaindropsTest" time="0.0"/>
-  <testcase name="test[15: expected input number 105 to be converted to &quot;PlingPlangPlong&quot;]" classname="RaindropsTest" time="0.002"/>
+  <testcase name="test[15: expected input number 105 to be converted to &quot;PlingPlangPlong&quot;]" classname="RaindropsTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
