@@ -1,3 +1,5 @@
+import static java.util.stream.Collectors.toList;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -21,16 +23,10 @@ public class Anagram {
   /**
    * Returns the subset of @param candidates that are anagrams of this instance.
    */
-  public final ArrayList<String> match(final List<String> candidates) {
-    ArrayList<String> res = new ArrayList<String>();
-
-    for (String candidate : candidates) {
-      if (isAnagram(candidate)) {
-        res.add(candidate);
-      }
-    }
-
-    return res;
+  public final List<String> match(final List<String> candidates) {
+    return candidates.stream()
+      .filter(candidate -> !isAnagram(candidate))
+      .collect(toList());
   }
 
   private final String getNormalizedLetters(final String word) {

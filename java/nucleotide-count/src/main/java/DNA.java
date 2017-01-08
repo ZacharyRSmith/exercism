@@ -15,8 +15,7 @@ public class DNA {
     validNucleotides.add('C');
   }
 
-  private static final HashMap<Character, Integer> nucleotideCounts
-    = new HashMap<Character, Integer>();
+  private static HashMap<Character, Integer> nucleotideCounts;
 
   static String sequence;
 
