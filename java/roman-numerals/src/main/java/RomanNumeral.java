@@ -13,18 +13,18 @@ public class RomanNumeral {
   }
 
   private static String genRomanNumeral(int num) {
-    String res = "";
+    final StringBuilder res = new StringBuilder();
     // Init at the 1's place.
     // Note that `place = 2` will be 10's place, `place = 3` will be 100's place, etc.
     int place = 1;
 
     while (num >= 1) {
-      res = getPlace(place, num % 10) + res;
+      res.append(getPlace(place, num % 10).reverse());
       place += 1;
       num /= 10;
     }
 
-    return res;
+    return res.reverse().toString();
   }
 
   /**
@@ -36,8 +36,9 @@ public class RomanNumeral {
    * @param place: The "digits place", eg "1's place", "10's place", etc.
    * @param num: The int at @param place's "digits place".
    */
-  private static String getPlace(final int place, final int num) {
-    if (num == 0) return "";
+  private static StringBuilder getPlace(final int place, final int num) {
+    StringBuilder res = new StringBuilder();
+    if (num == 0) return res;
     String one = "";
     String five = "";
     String ten = "";
@@ -73,25 +74,25 @@ public class RomanNumeral {
     // then case 4: return "XL".
     switch (num) {
       case 9:
-        return one + ten;
+        return res.append(one + ten);
       case 8:
-        return five + one + one + one;
+        return res.append(five + one + one + one);
       case 7:
-        return five + one + one;
+        return res.append(five + one + one);
       case 6:
-        return five + one;
+        return res.append(five + one);
       case 5:
-        return five;
+        return res.append(five);
       case 4:
-        return one + five;
+        return res.append(one + five);
       case 3:
-        return one + one + one;
+        return res.append(one + one + one);
       case 2:
-        return one + one;
+        return res.append(one + one);
       case 1:
-        return one;
+        return res.append(one);
       default:
-        return "";
+        return res;
     }
   }
 }
