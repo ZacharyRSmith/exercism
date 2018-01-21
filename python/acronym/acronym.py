@@ -1,6 +1,5 @@
-from functools import reduce
 import re
 
-def abbreviate(words: str) -> str:
+def abbreviate(words):
     wordList = re.split(r'\W+', words)
-    return reduce(lambda x, y: x + y[0].upper(), wordList, '')
+    return ''.join(word[0].upper() for word in wordList)
