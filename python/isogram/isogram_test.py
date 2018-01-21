@@ -34,6 +34,12 @@ class TestIsogram(unittest.TestCase):
     def test_duplicated_character_in_the_middle(self):
         self.assertFalse(is_isogram("accentor"))
 
+    def test_underscore(self):
+        self.assertTrue(is_isogram("fo_bar_"))
+
+    def test_hat(self):
+        self.assertTrue(is_isogram("^yo^"))
+
 
 if __name__ == '__main__':
     unittest.main()
