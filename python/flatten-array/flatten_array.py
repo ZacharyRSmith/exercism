@@ -1,19 +1,12 @@
-import collections
+def _flatten(iterable):
+    while iterable:
+        part = iterable.pop(0)
 
-
-def _isIter(item):
-    return isinstance(item, collections.Iterable) and type(item) != str
+        if isinstance(part, list):
+            iterable = part + iterable
+        elif part or part == 0:
+            yield part
 
 
 def flatten(iterable):
-    res = []
-
-    for item in iterable:
-        if item is None:
-            continue
-        if _isIter(item):
-            res.extend(flatten(item))
-        else:
-            res.append(item)
-
-    return res
+    return [i for i in _flatten(iterable)]
