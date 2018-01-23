@@ -16,6 +16,7 @@ class LuhnTests(unittest.TestCase):
                          Counter(Luhn(8631).addends()))
 
     def test_checksum1(self):
+        # 8923 -> 22 -> 2
         self.assertEqual(2, Luhn(4913).checksum())
 
     def test_ckecksum2(self):

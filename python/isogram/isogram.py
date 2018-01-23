@@ -1,10 +1,4 @@
 def is_isogram(string = ''):
-    if (not string): return True
-    letters = [c for c in string.lower() if c.isalpha()]
-
-    s = set(letters[0])
-    for ch in letters[1:]:
-        if (ch in s): return False
-        s.add(ch)
-
+    for i in range(ord('a'), ord('z')):
+        if string.lower().count(chr(i)) > 1: return False
     return True

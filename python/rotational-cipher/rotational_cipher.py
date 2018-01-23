@@ -1,3 +1,8 @@
+import string
+
+ALPHABET = string.ascii_lowercase
+ALPHABET_SIZE = len(ALPHABET)
+
 def rotate(text: str, key: int) -> str:
     # print(ord('a')) # 97
     # print(ord('z')) # 122
@@ -14,7 +19,7 @@ def rotate(text: str, key: int) -> str:
             continue
         o = ord(ch)
         if (shouldWrap(o)):
-            res += chr(o + key - 26)
+            res += chr(o + key - ALPHABET_SIZE)
         else:
             res += chr(o + key)
 
