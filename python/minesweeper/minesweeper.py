@@ -32,11 +32,16 @@ def each_cell(board, pred=lambda cell, i, j: True):
 def validate(board):
     def validate_cell(cell):
         if cell not in ' *':
-            raise ValueError(f'each cell must be ` ` or `*` but received `{cell}`')
+            raise ValueError(f'each cell must be ` ` or `*` but received `{cell}`')  # noqa
     for cell, i, j in each_cell(board):
         validate_cell(cell)
     if min(len(row) for row in board) != max(len(row) for row in board):
         raise ValueError('All rows must be of the same length.')
+
+
+def each_mine(board):
+    for cell, i, j in each_cell(board, lambda cell, i, j: cell == '*'):
+        yield cell, i, j
 
 
 def board(row_strings):
@@ -44,7 +49,7 @@ def board(row_strings):
         return []
     board = rows_to_board(row_strings)
     validate(board)
-    for cell, i, j in each_cell(board, lambda cell, i, j: cell == '*'):
-        for nx, ny, c in neighbors(board, j, i):
-            board[ny][nx] = c.translate(tt)
+    for mine, i, j in each_mine(board):
+        for nx, ny, cell in neighbors(board, j, i):
+            board[ny][nx] = cell.translate(tt)
     return board_to_rows(board)
