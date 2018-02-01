@@ -34,9 +34,9 @@ def board(input_board_array):
     validate_shape(input_board_array)
     output_board_array = [[0 if cell == ' ' else cell for cell in row]
                           for row in input_board_array]
+    shape = (len(input_board_array), len(input_board_array[0]))
 
     def incr_adj_cells_if_self_is_mine(cell, i, j):
-        shape = (len(input_board_array), len(input_board_array[0]))
         if cell != '*':
             return
         for i1, j1 in index_gen((i, j), shape):
