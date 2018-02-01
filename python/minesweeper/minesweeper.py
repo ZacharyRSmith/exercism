@@ -1,50 +1,50 @@
-def index_gen(coord, shape):
-    neighbors_ = (-1, 0, 1)
-    for dx in neighbors_:
-        for dy in neighbors_:
-            if not (dx == 0 and dy == 0):
-                new_x, new_y = coord[0] + dx, coord[1] + dy
-                if 0 <= new_x < shape[0] and 0 <= new_y < shape[1]:
-                    yield (new_x, new_y)
-    raise StopIteration
+valid_chars = " *12345678"
+tt = str.maketrans(' 1234567', '12345678')
 
 
-def validate(cell, i, j):
-    if cell not in ' *':
-        raise ValueError(f'invalid cell encountered: {cell}')
+def rows_to_board(row_strings):
+    return [list(r) for r in row_strings]
 
 
-def validate_shape(matrix):
-    if min(len(row) for row in matrix) != max(len(row) for row in matrix):
-        raise ValueError(f'all rows must be of same size')
+def board_to_rows(board):
+    return [''.join(r) for r in board]
 
 
-def each_cell(matrix, fn):
-    for i, row in enumerate(matrix):
-        for j, cell in enumerate(row):
-            fn(cell, i, j)
-
-
-def board(input_board_array):
-    if not input_board_array:
-        return []
-    if input_board_array == list():
-        return []
-    each_cell(input_board_array, validate)
-    validate_shape(input_board_array)
-    output_board_array = [[0 if cell == ' ' else cell for cell in row]
-                          for row in input_board_array]
-    shape = (len(input_board_array), len(input_board_array[0]))
-
-    def incr_adj_cells_if_self_is_mine(cell, i, j):
-        if cell != '*':
-            return
-        for i1, j1 in index_gen((i, j), shape):
-            if output_board_array[i1][j1] == '*':
+def neighbors(board, x, y):
+    w, h = len(board[0]), len(board)
+    min_y, max_y = max(y-1, 0), min(y+2, h)
+    min_x, max_x = max(x-1, 0), min(x+2, w)
+    for y2 in range(min_y, max_y):
+        for x2 in range(min_x, max_x):
+            if (x2 == x and y2 == y):
                 continue
-            output_board_array[i1][j1] += 1
+            yield x2, y2, board[y2][x2] or '1'
 
-    each_cell(input_board_array, incr_adj_cells_if_self_is_mine)
 
-    return [''.join(str(y) if y != 0 else ' ' for y in x)
-            for x in output_board_array]
+def each_cell(board, pred=lambda cell, i, j: True):
+    for i, row in enumerate(board):
+        for j, cell in enumerate(row):
+            if not pred(cell, i, j):
+                continue
+            yield cell, i, j
+
+
+def validate(board):
+    def validate_cell(cell):
+        if cell not in ' *':
+            raise ValueError(f'each cell must be ` ` or `*` but received `{cell}`')
+    for cell, i, j in each_cell(board):
+        validate_cell(cell)
+    if min(len(row) for row in board) != max(len(row) for row in board):
+        raise ValueError('All rows must be of the same length.')
+
+
+def board(row_strings):
+    if not row_strings:
+        return []
+    board = rows_to_board(row_strings)
+    validate(board)
+    for cell, i, j in each_cell(board, lambda cell, i, j: cell == '*'):
+        for nx, ny, c in neighbors(board, j, i):
+            board[ny][nx] = c.translate(tt)
+    return board_to_rows(board)
