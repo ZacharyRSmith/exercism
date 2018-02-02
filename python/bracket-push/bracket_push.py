@@ -1,30 +1,34 @@
-# simple solution not fulfilling all requirements
+def get_brackets(string):
+    return ''.join(ch for ch in string if ch in '{[()]}')
+
+
+open_to_close = {
+    '{': '}',
+    '[': ']',
+    '(': ')'
+}
+
+
 def check_brackets(input_string):
-    num_square_open = 0
-    num_curly_open = 0
-    num_parens_open = 0
-    for ch in input_string:
-        if ch == '[':
-            num_square_open += 1
-        elif ch == '{':
-            num_curly_open += 1
-        elif ch == '(':
-            num_parens_open += 1
-        elif ch == ']':
-            if num_square_open == 0:
-                return False
+    brackets = get_brackets(input_string)
+
+    def recurse(open_bracket, rest):
+        while rest:
+            next_ch = rest[0]
+            if next_ch in open_to_close:
+                rest = recurse(next_ch, rest[1:])
+            elif open_to_close[open_bracket] == next_ch:
+                return rest[1:]
             else:
-                num_square_open -= 1
-        elif ch == '}':
-            if num_curly_open == 0:
                 return False
-            else:
-                num_curly_open -= 1
-        elif ch == ')':
-            if num_parens_open == 0:
-                return False
-            else:
-                num_parens_open -= 1
-    if num_square_open > 0 or num_curly_open > 0 or num_parens_open > 0:
         return False
-    return True
+
+    if len(brackets) == 0:
+        return True
+    if brackets[0] in open_to_close:
+        while len(brackets) > 1:
+            brackets = recurse(brackets[0], brackets[1:])
+            if brackets is False:
+                return False
+        return len(brackets) == 0
+    return False
