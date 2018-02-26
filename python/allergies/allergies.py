@@ -1,12 +1,5 @@
-class Allergies (object):
-    def __init__(self, allergy_score):
-        # NOTE: I changed self.list to the pythonic self.lst
-        self.lst = self.__gen_lst(allergy_score)
-
-    def is_allergic_to(self, allergen):
-        return allergen in self.lst
-
-    def __gen_lst(self, allergy_score):
+class Allergies(object):
+    def __init__(self, score):
         allergens = {
             1: 'eggs',
             2: 'peanuts',
@@ -15,14 +8,9 @@ class Allergies (object):
             16: 'tomatoes',
             32: 'chocolate',
             64: 'pollen',
-            128: 'cats',
+            128: 'cats'
         }
+        self.lst = [a for k, a in allergens.items() if k & score]
 
-        # This is part of a non-bitwise/binary solution:
-#         for score, a in sorted(allergens.iteritems(), reverse=True):
-#             if allergy_score >= score:
-#                 lst.append(a)
-#                 allergy_score -= score
-
-        return [allergens[score] for score in allergens.keys()
-                if score & allergy_score > 0]
+    def is_allergic_to(self, allergen):
+        return allergen in self.lst
