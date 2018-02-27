@@ -1,14 +1,20 @@
-from string import ascii_letters, ascii_lowercase, maketrans
 import re
-
-ATBASH = maketrans(ascii_letters, 2*(ascii_lowercase[::-1]))
-
-
-def decode(code):
-    return code.translate(ATBASH, ' ')
+Plain = 'abcdefghijklmnopqrstuvwxyz'
+Cipher = 'zyxwvutsrqponmlkjihgfedcba'
+lookup = dict(zip(Plain, Cipher))
+back_lookup = dict(zip(Cipher, Plain))
 
 
-def encode(string):
-    s = re.sub(r'[\W]+', '', string).translate(ATBASH)
+def decode(ciphertext):
+    return ''.join(back_lookup[ch] for ch in ciphertext if ch != ' ')
 
-    return ' '.join([s[i:i + 5] for i in range(0, len(s), 5)])
+
+def encode(plaintext):
+    encoded = ''.join(encode_ch(ch) for ch in re.sub('\W', '', plaintext))
+    return ' '.join([encoded[i:i + 5] for i in range(0, len(encoded), 5)])
+
+
+def encode_ch(ch):
+    if ch.lower() not in lookup:
+        return ch
+    return lookup[ch.lower()]
