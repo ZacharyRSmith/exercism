@@ -1,8 +1,3 @@
-def is_armstrong(number: int) -> bool:
-    digits = str(number)
-    numDigits = len(digits)
-
-    return sum(
-        [int(digit) ** numDigits
-            for digit in digits]
-        ) == number
+def is_armstrong(num):
+    as_str = str(num)
+    return num == sum(int(ch)**len(as_str) for ch in as_str)
