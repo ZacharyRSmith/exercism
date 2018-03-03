@@ -1,14 +1,10 @@
-def histogram(word):
-    res = {}
-    for ch in word:
-        if ch not in res:
-            res[ch] = 0
-        res[ch] += 1
-    return res
+from collections import Counter
+
+
+def is_anagram(a, b):
+    return a.lower() != b.lower() and Counter(a.lower()) == Counter(b.lower())
 
 
 def detect_anagrams(word, words):
-    word_histogram = histogram(word.lower())
-    word_lowered = word.lower()
-    return [w for w in words
-            if w.lower() != word_lowered and histogram(w.lower()) == word_histogram]
+    'Returns each word in @words that is an anagram of @word.'
+    return [w for w in words if is_anagram(w, word)]
