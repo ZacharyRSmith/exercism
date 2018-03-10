@@ -1,23 +1,26 @@
+import typing
+
+
 class Frame(object):
     """Frame"""
 
-    def __init__(self, ID):
-        self.id = ID
-        self.throws = []
+    def __init__(self, ID) -> None:
+        self.id = ID    # type: int
+        self.throws = []    # type: typing.List[int]
 
     @property
-    def is_done(self):
+    def is_done(self) -> bool:
         return sum(self.throws) == 10 or len(self.throws) == 2
 
     @property
-    def is_strike(self):
+    def is_strike(self) -> bool:
         return sum(self.throws) == 10 and len(self.throws) == 1
 
     @property
-    def is_spare(self):
+    def is_spare(self) -> int:
         return sum(self.throws) == 10 and len(self.throws) == 2
 
-    def score(self, next_throws):
+    def score(self, next_throws: typing.List[int]) -> int:
         res = sum(self.throws)
         if self.is_strike:
             res += sum(next_throws[:2])
@@ -25,7 +28,7 @@ class Frame(object):
             res += sum(next_throws[:1])
         return res
 
-    def roll(self, pins):
+    def roll(self, pins: int) -> None:
         if pins < 0:
             raise ValueError(f'pins cannot be negative but received "{pins}".')
         if pins > 10:
@@ -38,8 +41,8 @@ class Frame(object):
 class BowlingGame(object):
     """BowlingGame"""
 
-    def __init__(self):
-        self.bonus_throws = []
+    def __init__(self) -> None:
+        self.bonus_throws = []  # type: typing.List[int]
         self.frames = [Frame(i) for i in range(10)]
         self.frame_num = 0
 
@@ -47,11 +50,11 @@ class BowlingGame(object):
     def crnt_frame(self):
         return self.get_frame(self.frame_num)
 
-    def get_frame(self, frame_num):
+    def get_frame(self, frame_num: int) -> Frame:
         return self.frames[frame_num]
 
-    def next_throws(self, frameID):
-        next_throws = []
+    def next_throws(self, frameID: int) -> typing.List[int]:
+        next_throws = []    # type: typing.List[int]
         next_frameID = frameID + 1
         while next_frameID < 10:
             next_throws += self.get_frame(next_frameID).throws
@@ -59,7 +62,7 @@ class BowlingGame(object):
         next_throws += self.bonus_throws
         return next_throws
 
-    def handle_bonus_throw(self, pins):
+    def handle_bonus_throw(self, pins: int) -> None:
         if self.get_frame(9).is_spare:
             if len(self.bonus_throws) == 1:
                 raise IndexError(f'Game over. Please insert quarter.')
@@ -76,7 +79,7 @@ class BowlingGame(object):
         else:
             raise IndexError(f'Game over. Please insert quarter.')
 
-    def roll(self, pins):
+    def roll(self, pins: int) -> None:
         if pins > 10:
             raise ValueError(f'You lie!')
         if self.frame_num == 10:
@@ -86,7 +89,7 @@ class BowlingGame(object):
             if self.crnt_frame.is_done:
                 self.frame_num += 1
 
-    def score(self):
+    def score(self) -> int:
         if self.frame_num < 10:
             raise IndexError(f'All frames must be complete before scoring.')
         if self.get_frame(9).is_spare:

@@ -1,5 +1,5 @@
 class Allergies(object):
-    def __init__(self, score):
+    def __init__(self, score: int) -> None:
         allergens = {
             1: 'eggs',
             2: 'peanuts',
@@ -12,5 +12,5 @@ class Allergies(object):
         }
         self.lst = [a for k, a in allergens.items() if k & score]
 
-    def is_allergic_to(self, allergen):
+    def is_allergic_to(self, allergen: str) -> bool:
         return allergen in self.lst
