@@ -1,3 +1,7 @@
+#!/usr/bin/env python3
+
+"""Parse and evaluate simple math word problems."""
+
 import ast
 import re
 
@@ -39,6 +43,7 @@ def _normalize(question):
 
 
 def calculate(question):
+    """Parse and evaluate simple math word problems."""
     q = _normalize(question)
     # print(q)
     res = int(q[0])
